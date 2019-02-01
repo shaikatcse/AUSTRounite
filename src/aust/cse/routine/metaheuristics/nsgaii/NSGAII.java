@@ -38,7 +38,7 @@ import jmetal.util.JMException;
 import jmetal.util.Ranking;
 import jmetal.util.comparators.CrowdingComparator;
 
-import aust.cse.routine.problem.multiObjective.AUSTCSERoutineMultiObjectiveProblemV1;
+import aust.cse.routine.problem.multiObjective.withoutDataBase.AUSTCSERoutineMultiObjectiveProblemV2;
 
 /**
  * Implementation of NSGA-II. This implementation of NSGA-II makes use of a
@@ -171,7 +171,7 @@ public class NSGAII extends Algorithm {
 
 		for (int i = 0; i < populationSize / 2; i++) {
 
-			newSolution = ((AUSTCSERoutineMultiObjectiveProblemV1) problem_).createVariable();
+			newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2) problem_).createVariable();
 			problem_.evaluate(newSolution);
 			problem_.evaluateConstraints(newSolution);
 			evaluations++;

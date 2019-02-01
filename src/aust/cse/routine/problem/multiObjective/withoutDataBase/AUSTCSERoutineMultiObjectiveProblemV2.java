@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package aust.cse.routine.problem.multiObjective;
+package aust.cse.routine.problem.multiObjective.withoutDataBase;
 
 
 import jmetal.core.Problem;
@@ -47,7 +47,7 @@ import aust.cse.routine.util.SlotInfo;
 /**
  * Class representing a TSP (Traveling Salesman Problem) problem.
  */
-public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
+public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 
 	
 	final int numberOfTheorySlots=378;
@@ -62,6 +62,8 @@ public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
 	
 	ArrayList<CourseInfo> courseInfo;
 	ArrayList<SlotInfo> slotInfo;
+	
+	ModellingObjectives modellingObjectives;
 	
 	int numberOfDatabaseAccess=0;
 	
@@ -818,7 +820,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
    * Creates a new TSP problem instance. It accepts data files from TSPLIB
    * @param filename The file containing the definition of the problem
    */
-  public AUSTCSERoutineMultiObjectiveProblemV1(String solutionType) {
+  public AUSTCSERoutineMultiObjectiveProblemV2(String solutionType) {
     
 	  
 	  numberOfVariables_  = 1;
@@ -832,6 +834,9 @@ public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
     
     //connect the database
     dbConnection=connectDatabase();
+    
+    //modelling objective
+   // modellingObjectives = new ModellingObjectives();
     
     //read courseInfo from courInfo.csv file
     readCourseInfoFromFile();
@@ -943,12 +948,14 @@ public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
 	    bigInsertQuery="INSERT INTO 'CourseClassroomTimeslot'";
 	    //forint i=0; i<length; i++) {
 	    	
+	    modellingObjectives = new ModellingObjectives();
 	    
 	    for(int i=0; i<500; i++) {
 	    	
 	    	slotInfo = SlotInfo.searchSlotInfoArryList(this.slotInfo, i+"");
 	    	courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, ((Permutation)solution.getDecisionVariables()[0]).vector_[i]);
 	    	
+	    	modellingObjectives.fillUpTheMap(slotInfo, courseInfo);
 	    	
 	    	if(i==0) {
 	    		bigInsertQuery=bigInsertQuery +" SELECT '" +courseInfo.getCourseNo() +"' AS 'courseNo', '"+slotInfo.getSlotID()+"' AS 'slotId', '"+slotInfo.getRoomNo()+"' AS 'RoomNo', '"+ courseInfo.getAssignedSection() +"' AS 'Section' ,'"+courseInfo.getAssignedLabSection()+ "' AS 'StudentGroup' ,'"+slotInfo.getSession()+"' AS 'Session'";		
@@ -983,6 +990,9 @@ public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
 	    	
 	    	slotInfo = SlotInfo.searchSlotInfoArryList(this.slotInfo, i+"");
 	    	courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, ((Permutation)solution.getDecisionVariables()[0]).vector_[i]);
+	   
+	     	modellingObjectives.fillUpTheMap(slotInfo, courseInfo);
+	 	   
 	    	
 	    	//fill the table
 	    	//insertARowToCourseClassroomTimeslotTable(courseInfo, slotInfo);
@@ -1045,6 +1055,8 @@ public class AUSTCSERoutineMultiObjectiveProblemV1 extends Problem {
     
     
     double obj1=calculateObjective1();
+    double ttt = modellingObjectives.calculateTotalTime();
+    
     double obj2=calculateObjective2();
 
    
@@ -1255,5 +1267,10 @@ void swapingTwoSlots(Solution s, int slotNo1, int slotNo2){
 			}
   }
 		}
+
+
+
+
+
 
 } // TSP
