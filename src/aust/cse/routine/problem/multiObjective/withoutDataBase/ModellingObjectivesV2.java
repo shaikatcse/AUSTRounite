@@ -135,15 +135,33 @@ public class ModellingObjectivesV2 {
 					// add 50 minute to start time
 					cal.add(Calendar.MINUTE, 50);
 					endTimeLabSec1 = cal.getTime();
-				} else if (courseInfo.getCourseType().equals("Lab")) {
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
+							startTimeLabSec1, endTimeLabSec1,startTimeLabSec1, endTimeLabSec1);
+					mapForStudentTiming.put(key, st);
+				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("3")) {
 					// add 150 mintues to start time
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec1 = cal.getTime();
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
+							startTimeLabSec1, endTimeLabSec1,startTimeLabSec1, endTimeLabSec1);
+					mapForStudentTiming.put(key, st);
+				}else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1")) {
+					// add 150 mintues to start time
+					cal.add(Calendar.MINUTE, 150);
+					endTimeLabSec1 = cal.getTime();
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
+							startTimeLabSec1, endTimeLabSec1,null, null);
+					mapForStudentTiming.put(key, st);
+				}else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1")) {
+					// add 150 mintues to start time
+					cal.add(Calendar.MINUTE, 150);
+					endTimeLabSec2 = cal.getTime();
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
+							null, null, startTimeLabSec2, endTimeLabSec2);
+					mapForStudentTiming.put(key, st);
 				}
 
-				StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
-						startTimeLabSec1, endTimeLabSec1,startTimeLabSec1, endTimeLabSec1);
-				mapForStudentTiming.put(key, st);
+				
 			} else {
 				// if the key is already contained, we need to update start and end time
 				if (courseInfo.getCourseType().equals("Theory")) {
