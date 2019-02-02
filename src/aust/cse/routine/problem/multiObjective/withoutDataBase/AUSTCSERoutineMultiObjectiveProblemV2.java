@@ -63,7 +63,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	ArrayList<CourseInfo> courseInfo;
 	ArrayList<SlotInfo> slotInfo;
 	
-	ModellingObjectives modellingObjectives;
+	ModellingObjectivesV2 modellingObjectives;
 	
 	int numberOfDatabaseAccess=0;
 	
@@ -948,7 +948,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	    bigInsertQuery="INSERT INTO 'CourseClassroomTimeslot'";
 	    //forint i=0; i<length; i++) {
 	    	
-	    modellingObjectives = new ModellingObjectives();
+	    modellingObjectives = new ModellingObjectivesV2();
 	    
 	    for(int i=0; i<500; i++) {
 	    	
