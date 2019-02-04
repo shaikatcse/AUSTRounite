@@ -82,6 +82,11 @@ public class ModellingObjectivesV2 {
 
 	boolean WhichTimeIsBefore(Date t1, Date t2) {
 		// return true is t1 is before, else return false
+		if(t1==null)
+			return false;
+		else if(t2==null)
+			return true;
+		
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(t1);
 
@@ -95,6 +100,11 @@ public class ModellingObjectivesV2 {
 
 	boolean WhichTimeIsAfter(Date t1, Date t2) {
 		// return true is t1 is before, else return false
+		if(t1==null)
+			return false;
+		else if(t2==null)
+			return true;
+		
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(t1);
 
@@ -363,13 +373,22 @@ public class ModellingObjectivesV2 {
 
 			StudentTimingConsideringLabSections st = mapForStudentTiming
 					.get(new MultiKey(key.getYearSemester(), key.getSection(), key.getDay()));
+			
 			SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
-			System.out.println(key.getYearSemester() + " " + key.getSection() + " " + key.getDay() + " "
+			if(st.getStartTimeLabSec1()!=null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + " " + key.getDay() + " "
 					+ dateFormat.format(st.startTimeLabSec1) + " " + dateFormat.format(st.endTimeLabSec1));
+			if(st.getStartTimeLabSec1()==null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + " " + key.getDay() + " "
+					+ "null" + " " + "null");
 
-			System.out.println(key.getYearSemester() + " " + key.getSection() + " " + key.getDay() + " "
+			if(st.getStartTimeLabSec2()!=null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + " " + key.getDay() + " "
 					+ dateFormat.format(st.startTimeLabSec2) + " " + dateFormat.format(st.endTimeLabSec2));
+			if(st.getStartTimeLabSec2()==null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + " " + key.getDay() + " "
+					+ "null" + " " + "null");
+			
 		}
 	}
 
