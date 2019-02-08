@@ -1,0 +1,215 @@
+TearcherName,CourseNo,Section,StudentGroup
+Mr. Md. Aminur Rahman,CSE1101,A,3
+Mr. Md. Aminur Rahman,CSE1101,B,3
+Mr. Md. Aminur Rahman,CSE1101,C,3
+Mr. Md. Aminur Rahman,CSE1102,A,1
+Mr. Md. Aminur Rahman,CSE1102,A,2
+Mr. Md. Aminur Rahman,CSE1102,B,1
+Mr. Md. Aminur Rahman,CSE1102,B,2
+Mr. Md. Aminur Rahman,CSE1102,C,1
+Mr. Md. Aminur Rahman,CSE1102,C,2
+Ms. Tasnim Kabir,CSE1102,C,1
+Ms. Tasnim Kabir,CSE1102,C,2
+Ms. Tasnim Kabir,CSE1102,A,2
+Ms. Mahzabeen Emu,CSE1102,B,1
+Ms. Mahzabeen Emu,CSE1102,B,2
+Ms. Mahzabeen Emu,CSE1102,A,1
+Ms. Shanjida Khatun,CSE1108,A,1
+Ms. Shanjida Khatun,CSE1108,A,2
+Ms. Shanjida Khatun,CSE1108,C,1
+Ms. Shanjida Khatun,CSE1108,C,2
+Mr. Mir Tafseer Nayeem,CSE1108,B,1
+Mr. Mir Tafseer Nayeem,CSE1108,B,2
+Sk. Murad Hassan Anik,CSE1108,A,1
+Sk. Murad Hassan Anik,CSE1108,A,2
+Sk. Murad Hassan Anik,CSE1108,B,1
+Sk. Murad Hassan Anik,CSE1108,B,2
+Sk. Murad Hassan Anik,CSE1108,C,1
+Sk. Murad Hassan Anik,CSE1108,C,2
+Mr. Md. Hosne-Al-Walid Shaiket,CSE1200,B,1
+Mr. Md. Hosne-Al-Walid Shaiket,CSE1200,B,2
+Mr. Shoeb Mohammad Shahriar,CSE1200,A,1
+Mr. Shoeb Mohammad Shahriar,CSE1200,A,2
+Mr. Mir Imtiaz Mostafiz,CSE1200,A,1
+Mr. Mir Imtiaz Mostafiz,CSE1200,A,2
+Mr. Mir Imtiaz Mostafiz,CSE1200,B,2
+Mr. Emam Hossain,CSE1203,A,3
+Mr. Emam Hossain,CSE1203,B,3
+Dr. Md Shahriar Mahbub,CSE1205,A,3
+Dr. Md Shahriar Mahbub,CSE1205,B,3
+Dr. Md Shahriar Mahbub,CSE1206,A,1
+Dr. Md Shahriar Mahbub,CSE1206,A,2
+Dr. Md Shahriar Mahbub,CSE1206,B,1
+Dr. Md Shahriar Mahbub,CSE1206,B,2
+Mr. Taksir Hasan Majumder,CSE1206,A,2
+Ms. Tasnim Kabir,CSE1206,A,1
+Ms. Tasnim Kabir,CSE1206,B,1
+Ms. Tasnim Kabir,CSE1206,B,2
+Dr. Md Shahriar Mahbub,CSE2100,B,3
+Dr. Md Shahriar Mahbub,CSE2100,C,3
+Mr. Md. Wasi Ul Kabir,CSE2100,A,3
+Mr. Md. Khairul Hasan,CSE2103,A,3
+Mr. Md. Khairul Hasan,CSE2103,B,3
+Mr. Md. Khairul Hasan,CSE2103,C,3
+Mr. Md. Khairul Hasan,CSE2104,B,1
+Mr. Md. Khairul Hasan,CSE2104,B,2
+Mr. Md. Khairul Hasan,CSE2104,C,1
+Mr. Md. Khairul Hasan,CSE2104,C,2
+Mr. Sujan Sarker,CSE2104,A,1
+Mr. Sujan Sarker,CSE2104,A,2
+Mr. Sujan Sarker,CSE2104,B,1
+Mr. Sujan Sarker,CSE2104,B,2
+Mr. Sujan Sarker,CSE2104,C,1
+Mr. Sujan Sarker,CSE2104,C,2
+Ms. Syeda Shabnam Hasan,CSE2105,A,3
+Ms. Syeda Shabnam Hasan,CSE2105,B,3
+Ms. Syeda Shabnam Hasan,CSE2105,C,3
+Ms. Syeda Shabnam Hasan,CSE2106,B,1
+Ms. Syeda Shabnam Hasan,CSE2106,B,2
+Ms. Syeda Shabnam Hasan,CSE2106,C,1
+Ms. Syeda Shabnam Hasan,CSE2106,C,2
+Mr. Shoeb Mohammad Shahriar,CSE2106,A,1
+Mr. Shoeb Mohammad Shahriar,CSE2106,A,2
+Mr. Shoeb Mohammad Shahriar,CSE2106,C,1
+Mr. Shoeb Mohammad Shahriar,CSE2106,C,2
+Sk. Murad Hassan Anik,CSE2200,A,3
+Sk. Murad Hassan Anik,CSE2200,B,3
+Ms. Shanjida Khatun,CSE2201,A,3
+Ms. Shanjida Khatun,CSE2201,B,3
+Ms. Shanjida Khatun,CSE2202,A,3
+Ms. Shanjida Khatun,CSE2202,B,3
+Dr. Mohammad Shafiul Alam,CSE2202,A,3
+Dr. Mohammad Shafiul Alam,CSE2202,B,3
+Mr. Faisal Muhammad Shah,CSE2207,A,3
+Mr. Faisal Muhammad Shah,CSE2207,B,3
+Mr. Faisal Muhammad Shah,CSE2208,A,1
+Mr. Faisal Muhammad Shah,CSE2208,B,1
+Mr. Faisal Muhammad Shah,CSE2208,A,2
+Mr. Faisal Muhammad Shah,CSE2208,B,2
+Mr. Shoeb Mohammad Shahriar,CSE2209,A,3
+Mr. Shoeb Mohammad Shahriar,CSE2209,B,3
+Mr. Shoeb Mohammad Shahriar,CSE2210,A,3
+Mr. Shoeb Mohammad Shahriar,CSE2210,B,3
+Mr. Mir Imtiaz Mostafiz,CSE2210,A,3
+Mr. Mir Imtiaz Mostafiz,CSE2210,B,3
+Ms. Qamrun Nahar Eity,CSE2213,A,3
+Ms. Qamrun Nahar Eity,CSE2213,B,3
+Ms. Qamrun Nahar Eity,CSE2214,A,1
+Ms. Qamrun Nahar Eity,CSE2214,A,2
+Ms. Qamrun Nahar Eity,CSE2214,B,1
+Ms. Qamrun Nahar Eity,CSE2214,B,2
+Ms. Tahsin Aziz,CSE2214,A,2
+Ms. Tahsin Aziz,CSE2214,B,2
+Mr. Taksir Hasan Majumder,CSE2214,A,1
+Ms. Tahsin Aziz,CSE2214,B,1
+Mr. D. M. Anisuzzaman,CSE3100,A,3
+Mr. D. M. Anisuzzaman,CSE3100,B,3
+Mr. D. M. Anisuzzaman,CSE3100,C,3
+Dr. Mohammad Shafiul Alam,CSE3101,A,3
+Dr. Mohammad Shafiul Alam,CSE3101,B,3
+Dr. Mohammad Shafiul Alam,CSE3101,C,3
+Mr. Nazmus Sakib,CSE3103,A,3
+Mr. Nazmus Sakib,CSE3103,B,3
+Mr. Nazmus Sakib,CSE3103,C,3
+Mr. Nazmus Sakib,CSE3104,A,1
+Mr. Nazmus Sakib,CSE3104,A,2
+Mr. Nazmus Sakib,CSE3104,B,1
+Mr. Nazmus Sakib,CSE3104,B,2
+Mr. Mohammad Moinul Hoque,CSE3104,C,1
+Mr. Mohammad Moinul Hoque,CSE3104,C,2
+Mr. Mir Tafseer Nayeem,CSE3104,C,1
+Mr. Mir Tafseer Nayeem,CSE3104,C,2
+Mr. Mir Tafseer Nayeem,CSE3104,A,2
+Ms. Tahsin Aziz,CSE3107,A,3
+Ms. Tahsin Aziz,CSE3107,B,3
+Ms. Tahsin Aziz,CSE3107,C,3
+Ms. Tahsin Aziz,CSE3108,A,3
+Ms. Tahsin Aziz,CSE3108,B,3
+Ms. Tahsin Aziz,CSE3108,C,3
+Ms. Qamrun Nahar Eity,CSE3108,A,3
+Ms. Qamrun Nahar Eity,CSE3108,B,3
+Mr. D. M. Anisuzzaman,CSE3109,A,3
+Mr. D. M. Anisuzzaman,CSE3109,B,3
+Mr. D. M. Anisuzzaman,CSE3109,C,3
+Mr. D. M. Anisuzzaman,CSE3110,A,3
+Mr. D. M. Anisuzzaman,CSE3110,B,3
+Mr. D. M. Anisuzzaman,CSE3110,C,3
+Mr. Taksir Hasan Majumder,CSE3110,A,3
+Mr. Taksir Hasan Majumder,CSE3110,B,3
+Ms. Anika Sayara,CSE3200,A,3
+Ms. Anika Sayara,CSE3200,B,3
+Mr. Mohammad Moinul Hoque,CSE3213,A,3
+Mr. Mohammad Moinul Hoque,CSE3213,B,3
+Mr. Mohammad Moinul Hoque,CSE3214,A,1
+Mr. Mohammad Moinul Hoque,CSE3214,A,2
+Mr. Mohammad Moinul Hoque,CSE3214,B,1
+Mr. Mohammad Moinul Hoque,CSE3214,B,2
+Ms. Afsana Ahmed Munia,CSE3215,A,3
+Ms. Afsana Ahmed Munia,CSE3215,B,3
+Ms. Afsana Ahmed Munia,CSE3216,A,3
+Ms. Afsana Ahmed Munia,CSE3216,B,3
+Dr. Nusrat Sharmin,CSE3223,A,3
+Dr. Nusrat Sharmin,CSE3223,B,3
+Dr. Nusrat Sharmin,CSE3224,A,3
+Dr. Nusrat Sharmin,CSE3224,B,3
+Mr. Emam Hossain,CSE3224,A,3
+Mr. Emam Hossain,CSE3224,B,3
+Mr. Tanvir Ahmed,CSE4101,A,3
+Mr. Tanvir Ahmed,CSE4101,B,3
+Mr. Tanvir Ahmed,CSE4101,C,3
+Mr. Tanvir Ahmed,CSE4102,B,1
+Mr. Tanvir Ahmed,CSE4102,B,2
+Mr. Tanvir Ahmed,CSE4102,C,1
+Mr. Tanvir Ahmed,CSE4102,C,2
+Mr. Taksir Hasan Majumder,CSE4102,A,2
+Mr. Taksir Hasan Majumder,CSE4102,A,1
+Mr. Taksir Hasan Majumder,CSE4102,B,1
+Mr. Taksir Hasan Majumder,CSE4102,B,2
+Mr. Taksir Hasan Majumder,CSE4102,C,1
+Mr. Taksir Hasan Majumder,CSE4102,C,2
+Ms. Raqeebir Rab,CSE4102,A,1
+Ms. Raqeebir Rab,CSE4102,A,2
+Mr. Md. Wasi Ul Kabir,CSE4107,A,3
+Mr. Md. Wasi Ul Kabir,CSE4107,B,3
+Mr. Md. Wasi Ul Kabir,CSE4107,C,3
+Mr. Md. Wasi Ul Kabir,CSE4108,A,3
+Mr. Md. Wasi Ul Kabir,CSE4108,B,3
+Mr. Md. Wasi Ul Kabir,CSE4108,C,3
+Ms. Anika Sayara,CSE4108,A,3
+Mr. Mir Imtiaz Mostafiz,CSE4108,B,3
+Mr. Mir Imtiaz Mostafiz,CSE4108,C,3
+Mr. Mohammad Imrul Jubair,CSE4125,A,3
+Mr. Mohammad Imrul Jubair,CSE4125,B,3
+Mr. Mohammad Imrul Jubair,CSE4125,C,3
+Mr. Mohammad Imrul Jubair,CSE4126,A,3
+Mr. Mohammad Imrul Jubair,CSE4126,B,3
+Mr. Mohammad Imrul Jubair,CSE4126,C,3
+Dr. S. M. Abdullah Al-Mamun,CSE4129,A,3
+Dr. S. M. Abdullah Al-Mamun,CSE4129,B,3
+Dr. S. M. Abdullah Al-Mamun,CSE4129,C,3
+Dr. S. M. Abdullah Al-Mamun,CSE4130,A,3
+Dr. S. M. Abdullah Al-Mamun,CSE4130,B,3
+Mr. Mohammad Imrul Jubair,CSE4130,C,3
+Mr. Mir Tafseer Nayeem,CSE4130,A,3
+Mr. Mir Tafseer Nayeem,CSE4130,B,3
+Mr. Mir Tafseer Nayeem,CSE4130,C,3
+Mr. Md. Hosne-Al-Walid Shaiket,CSE4203,A,3
+Mr. Md. Hosne-Al-Walid Shaiket,CSE4203,B,3
+Mr. Md. Hosne-Al-Walid Shaiket,CSE4204,A,3
+Mr. Md. Hosne-Al-Walid Shaiket,CSE4204,B,3
+Dr. Mohammad Shafiul Alam,CSE4214,A,3
+Dr. Mohammad Shafiul Alam,CSE4214,B,3
+Mr. Sujan Sarker,CSE4225,A,3
+Mr. Sujan Sarker,CSE4225,B,3
+Mr. Sujan Sarker,CSE4226,A,3
+Mr. Sujan Sarker,CSE4226,B,3
+Ms. Raqeebir Rab,CSE4226,A,3
+Ms. Raqeebir Rab,CSE4226,B,3
+Ms. Raqeebir Rab,CSE4255,A,3
+Ms. Raqeebir Rab,CSE4255,B,3
+Dr. Kazi A Kalpoma,CSE4227,A,3
+Dr. Kazi A Kalpoma,CSE4227,B,3
+Mr. Mir Imtiaz Mostafiz,CSE4228,A,3
+Mr. Mir Imtiaz Mostafiz,CSE4228,B,3
+Mr. Md. Hosne-Al-Walid Shaiket,CSE4228,A,3
+Mr. Md. Hosne-Al-Walid Shaiket,CSE4228,B,3
