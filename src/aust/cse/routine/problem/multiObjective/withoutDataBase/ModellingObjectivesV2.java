@@ -67,7 +67,7 @@ class StudentTimingConsideringLabSections {
 
 }
 
-class TeacherTiming{
+class TeacherTiming {
 	Date startTime, endTime;
 
 	public Date getStartTime() {
@@ -91,37 +91,37 @@ class TeacherTiming{
 		this.startTime = startTime;
 		this.endTime = endTime;
 	}
-	
+
 }
+
 public class ModellingObjectivesV2 {
-	
+
 	ArrayList<TeacherAssignedCourseInfo> teacherAssignedCourseInfo;
-	
+
 	// Calculate student time
 	MultiKeyMap<MultiKey, StudentTimingConsideringLabSections> mapForStudentTiming;
-	
-	//calculate teacher time
-	MultiKeyMap<MultiKey, TeacherTiming> mapForTeacherTiming;
-	
-	
-	// calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab
-	MultiKeyMap<MultiKey, Integer> mapForNoOfTheoryForStudent, mapForNoOfLabForStudent;
 
+	// calculate teacher time
+	MultiKeyMap<MultiKey, TeacherTiming> mapForTeacherTiming;
+
+	
 	// calculateConstraintsForNotMoreThanTwoLabsInADayForStudents
 
 	public ModellingObjectivesV2() {
 		this.mapForStudentTiming = new MultiKeyMap<MultiKey, StudentTimingConsideringLabSections>();
 		this.mapForTeacherTiming = new MultiKeyMap<MultiKey, TeacherTiming>();
 		readTeacherAssignedCourseInfoFromFile();
+		
+	
 	}
 
 	boolean WhichTimeIsBefore(Date t1, Date t2) {
 		// return true is t1 is before, else return false
-		if(t1==null)
+		if (t1 == null)
 			return false;
-		else if(t2==null)
+		else if (t2 == null)
 			return true;
-		
+
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(t1);
 
@@ -135,11 +135,11 @@ public class ModellingObjectivesV2 {
 
 	boolean WhichTimeIsAfter(Date t1, Date t2) {
 		// return true is t1 is before, else return false
-		if(t1==null)
+		if (t1 == null)
 			return false;
-		else if(t2==null)
+		else if (t2 == null)
 			return true;
-		
+
 		Calendar cal1 = Calendar.getInstance();
 		cal1.setTime(t1);
 
@@ -153,19 +153,16 @@ public class ModellingObjectivesV2 {
 	public void fillUpTheMap(SlotInfo slotInfo, CourseInfo courseInfo) {
 		MultiKey key = new MultiKey(courseInfo.getCourseYearSemester(), courseInfo.getAssignedSection(),
 				slotInfo.getDay());
-		
 
-		
 		Calendar cal = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
 		Date startTimeLabSec1 = null;
 		Date startTimeLabSec2 = null;
-		
+
 		try {
 			startTimeLabSec1 = format.parse(slotInfo.getStartTime());
 			startTimeLabSec2 = format.parse(slotInfo.getStartTime());
-			
-				
+
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -173,7 +170,6 @@ public class ModellingObjectivesV2 {
 		cal.setTime(startTimeLabSec1);
 		Date endTimeLabSec1 = null;
 		Date endTimeLabSec2 = null;
-		
 
 		if (!courseInfo.getCourseNo().equals("freetime")) {
 			if (!mapForStudentTiming.containsKey(key)) {
@@ -182,34 +178,33 @@ public class ModellingObjectivesV2 {
 					// add 50 minute to start time
 					cal.add(Calendar.MINUTE, 50);
 					endTimeLabSec1 = cal.getTime();
-					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
-							startTimeLabSec1, endTimeLabSec1,startTimeLabSec1, endTimeLabSec1);
-					mapForStudentTiming.put(key, st);	
-					
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(startTimeLabSec1,
+							endTimeLabSec1, startTimeLabSec1, endTimeLabSec1);
+					mapForStudentTiming.put(key, st);
+
 				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("3")) {
 					// add 150 mintues to start time
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec1 = cal.getTime();
-					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
-							startTimeLabSec1, endTimeLabSec1,startTimeLabSec1, endTimeLabSec1);
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(startTimeLabSec1,
+							endTimeLabSec1, startTimeLabSec1, endTimeLabSec1);
 					mapForStudentTiming.put(key, st);
-				}else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1")) {
+				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1")) {
 					// add 150 mintues to start time
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec1 = cal.getTime();
-					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
-							startTimeLabSec1, endTimeLabSec1,null, null);
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(startTimeLabSec1,
+							endTimeLabSec1, null, null);
 					mapForStudentTiming.put(key, st);
-				}else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("2")) {
+				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("2")) {
 					// add 150 mintues to start time
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec2 = cal.getTime();
-					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(
-							null, null, startTimeLabSec2, endTimeLabSec2);
+					StudentTimingConsideringLabSections st = new StudentTimingConsideringLabSections(null, null,
+							startTimeLabSec2, endTimeLabSec2);
 					mapForStudentTiming.put(key, st);
 				}
 
-				
 			} else {
 				// if the key is already contained, we need to update start and end time
 				if (courseInfo.getCourseType().equals("Theory")) {
@@ -224,30 +219,31 @@ public class ModellingObjectivesV2 {
 					Date currentEndTimeLabSec1 = currentTime.getEndTimeLabSec1();
 					Date currentStartTimeLabSec2 = currentTime.getStartTimeLabSec2();
 					Date currentEndTimeLabSec2 = currentTime.getEndTimeLabSec2();
-					
+
 					//////////////////////////////////////////////
 
 					if (WhichTimeIsBefore(startTimeLabSec1, currentStartTimeLabSec1)) {
 						// if start time of the slot is before current start time
 						currentTime.setStartTimeLabSec1(startTimeLabSec1);
 					}
-					if(WhichTimeIsBefore(startTimeLabSec2, currentStartTimeLabSec2)) {
+					if (WhichTimeIsBefore(startTimeLabSec2, currentStartTimeLabSec2)) {
 						currentTime.setStartTimeLabSec2(startTimeLabSec2);
 					}
-					
+
 					if (WhichTimeIsAfter(endTimeLabSec1, currentEndTimeLabSec1)) {
 						// if end time of the slot is after current end time
 						currentTime.setEndTimeLabSec1(endTimeLabSec1);
-						
+
 					}
 					if (WhichTimeIsAfter(endTimeLabSec2, currentEndTimeLabSec2)) {
 						// if end time of the slot is after current end time
 						currentTime.setEndTimeLabSec2(endTimeLabSec2);
-						
+
 					}
 
 				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("3")) {
-					// if this is a Lab, but 0.75 cr lab, so add 150 with both of them; very simiral to theory
+					// if this is a Lab, but 0.75 cr lab, so add 150 with both of them; very simiral
+					// to theory
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec1 = cal.getTime();
 					endTimeLabSec2 = cal.getTime();
@@ -258,20 +254,19 @@ public class ModellingObjectivesV2 {
 					Date currentEndTimeLabSec1 = currentTime.getEndTimeLabSec1();
 					Date currentStartTimeLabSec2 = currentTime.getStartTimeLabSec2();
 					Date currentEndTimeLabSec2 = currentTime.getEndTimeLabSec2();
-					
+
 					//////////////////////////////////////////////
 
 					if (WhichTimeIsBefore(startTimeLabSec1, currentStartTimeLabSec1)) {
 						// if start time of the slot is before current start time
-						currentTime.setStartTimeLabSec1(startTimeLabSec1);						
+						currentTime.setStartTimeLabSec1(startTimeLabSec1);
 					}
 					if (WhichTimeIsBefore(startTimeLabSec2, currentStartTimeLabSec2)) {
 						// if start time of the slot is before current start time
 						currentTime.setStartTimeLabSec2(startTimeLabSec2);
-						
+
 					}
-					
-					
+
 					if (WhichTimeIsAfter(endTimeLabSec1, currentEndTimeLabSec1)) {
 						// if end time of the slot is after current end time
 						currentTime.setEndTimeLabSec1(endTimeLabSec1);
@@ -279,115 +274,133 @@ public class ModellingObjectivesV2 {
 					if (WhichTimeIsAfter(endTimeLabSec2, currentEndTimeLabSec2)) {
 						// if end time of the slot is after current end time
 						currentTime.setEndTimeLabSec2(endTimeLabSec2);
-						
+
 					}
 
-
-				}else if(courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1")){
-					//if this is a lab, but only with lab section 1.
+				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1")) {
+					// if this is a lab, but only with lab section 1.
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec1 = cal.getTime();
-					
+
 					// extract current start and end time
 					StudentTimingConsideringLabSections currentTime = mapForStudentTiming.get(key);
 					Date currentStartTimeLabSec1 = currentTime.getStartTimeLabSec1();
 					Date currentEndTimeLabSec1 = currentTime.getEndTimeLabSec1();
 					///////////////////////////////////////////////////////////////
-					
+
 					if (WhichTimeIsBefore(startTimeLabSec1, currentStartTimeLabSec1)) {
 						// if start time of the slot is before current start time
 						currentTime.setStartTimeLabSec1(startTimeLabSec1);
 					}
-										
+
 					if (WhichTimeIsAfter(endTimeLabSec1, currentEndTimeLabSec1)) {
 						// if end time of the slot is after current end time
 						currentTime.setEndTimeLabSec1(endTimeLabSec1);
 					}
-					
-				}else if(courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("2")){
-					//if this is a lab, but only with lab section 1.
+
+				} else if (courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("2")) {
+					// if this is a lab, but only with lab section 1.
 					cal.add(Calendar.MINUTE, 150);
 					endTimeLabSec2 = cal.getTime();
-					
+
 					// extract current start and end time
 					StudentTimingConsideringLabSections currentTime = mapForStudentTiming.get(key);
 					Date currentStartTimeLabSec2 = currentTime.getStartTimeLabSec2();
 					Date currentEndTimeLabSec2 = currentTime.getEndTimeLabSec2();
 					///////////////////////////////////////////////////////////////
-					
+
 					if (WhichTimeIsBefore(startTimeLabSec2, currentStartTimeLabSec2)) {
 						// if start time of the slot is before current start time
 						currentTime.setStartTimeLabSec2(startTimeLabSec2);
 					}
-					
+
 					if (WhichTimeIsAfter(endTimeLabSec2, currentEndTimeLabSec2)) {
 						// if end time of the slot is after current end time
 						currentTime.setEndTimeLabSec2(endTimeLabSec2);
 					}
-					
+
 				}
 
 			}
-			
-			MultiKey teacherKey = new MultiKey(getTeacherNameAssignedForACourse(courseInfo), slotInfo.getDay());
-			Date teacherEndTime = null ;
-			
-			if(!mapForTeacherTiming.containsKey(teacherKey)) {
-				if (courseInfo.getCourseType().equals("Theory")) {
-					// add 50 minute to start time
-					cal.add(Calendar.MINUTE, 50);
-					teacherEndTime = cal.getTime();
-					TeacherTiming tt = new TeacherTiming(startTimeLabSec1, teacherEndTime);
-					mapForTeacherTiming.put(teacherKey, tt);	
-					
-				} else if (courseInfo.getCourseType().equals("Lab") ) {
-					// add 150 mintues to start time
-					cal.add(Calendar.MINUTE, 150);
-					teacherEndTime = cal.getTime();
-					TeacherTiming tt = new TeacherTiming(startTimeLabSec1, teacherEndTime);
-					mapForTeacherTiming.put(teacherKey, tt);
-				}
-			}else {
-				if (courseInfo.getCourseType().equals("Theory")) {
-					// if this is a theory
-					cal.add(Calendar.MINUTE, 50);
-				}else if(courseInfo.getCourseType().equals("Lab")) {
-					cal.add(Calendar.MINUTE, 150);
-				}
+			if (getTeacherNameAssignedForACourse(courseInfo) != null) {
+				for (int i = 0; i < getTeacherNameAssignedForACourse(courseInfo).size(); i++) {
+					MultiKey teacherKey = new MultiKey(getTeacherNameAssignedForACourse(courseInfo).get(i),
+							slotInfo.getDay());
+					if (getTeacherNameAssignedForACourse(courseInfo).get(i) != null
+							&& getTeacherNameAssignedForACourse(courseInfo).get(i).equals("Dr. Mohammad Shafiul Alam")
+							&& slotInfo.getDay().equals("Sunday"))
+						System.out.println("");
 
-				teacherEndTime = cal.getTime();
-				
-				// extract current start and end time
-				TeacherTiming currentTeacherTime = mapForTeacherTiming.get(teacherKey);
-				Date currentTeacherStartTime = currentTeacherTime.getStartTime();
-				Date currentTeacherEndTime = currentTeacherTime.getEndTime();
-				
-				//////////////////////////////////////////////
+					Date teacherEndTime = null;
+					Calendar calTeacher = Calendar.getInstance();
+					Date startTimeTeacher = null;
+					try {
+						startTimeTeacher = format.parse(slotInfo.getStartTime());
+					} catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					calTeacher.setTime(startTimeTeacher);
 
-				if (WhichTimeIsBefore(startTimeLabSec1, currentTeacherStartTime)) {
-					// if start time of the slot is before current start time
-					currentTeacherTime.setStartTime(startTimeLabSec1);
-				}
-			
-				
-				if (WhichTimeIsAfter(teacherEndTime, currentTeacherEndTime)) {
-					// if end time of the slot is after current end time
-					currentTeacherTime.setEndTime(teacherEndTime);
-					
-				}
-				
+					if (!mapForTeacherTiming.containsKey(teacherKey)) {
+						if (courseInfo.getCourseType().equals("Theory")) {
+							// add 50 minute to start time
+							calTeacher.add(Calendar.MINUTE, 50);
+							teacherEndTime = calTeacher.getTime();
+							TeacherTiming tt = new TeacherTiming(startTimeLabSec1, teacherEndTime);
+							mapForTeacherTiming.put(teacherKey, tt);
 
+						} else if (courseInfo.getCourseType().equals("Lab")) {
+							// add 150 mintues to start time
+							calTeacher.add(Calendar.MINUTE, 150);
+							teacherEndTime = calTeacher.getTime();
+							TeacherTiming tt = new TeacherTiming(startTimeLabSec1, teacherEndTime);
+							mapForTeacherTiming.put(teacherKey, tt);
+						}
+					} else {
+						if (courseInfo.getCourseType().equals("Theory")) {
+							// if this is a theory
+							calTeacher.add(Calendar.MINUTE, 50);
+						} else if (courseInfo.getCourseType().equals("Lab")) {
+							calTeacher.add(Calendar.MINUTE, 150);
+						}
+
+						teacherEndTime = calTeacher.getTime();
+
+						// extract current start and end time
+						TeacherTiming currentTeacherTime = mapForTeacherTiming.get(teacherKey);
+						Date currentTeacherStartTime = currentTeacherTime.getStartTime();
+						Date currentTeacherEndTime = currentTeacherTime.getEndTime();
+
+						//////////////////////////////////////////////
+
+						if (WhichTimeIsBefore(startTimeLabSec1, currentTeacherStartTime)) {
+							// if start time of the slot is before current start time
+							currentTeacherTime.setStartTime(startTimeLabSec1);
+						}
+
+						if (WhichTimeIsAfter(teacherEndTime, currentTeacherEndTime)) {
+							// if end time of the slot is after current end time
+							currentTeacherTime.setEndTime(teacherEndTime);
+
+						}
+
+					}
+				}
 			}
 		}
+		
+		
+		
 	}
 
 	public double calculateTotalTime() {
 		long totalTime = 0;
 		for (MultiKey key : mapForStudentTiming.keySet()) {
 			StudentTimingConsideringLabSections st = mapForStudentTiming.get(key);
-			if(st.endTimeLabSec1!=null && st.startTimeLabSec1!=null)
+			if (st.endTimeLabSec1 != null && st.startTimeLabSec1 != null)
 				totalTime += (st.endTimeLabSec1.getTime() - st.startTimeLabSec1.getTime());
-			if(st.endTimeLabSec2!=null && st.startTimeLabSec2!=null)
+			if (st.endTimeLabSec2 != null && st.startTimeLabSec2 != null)
 				totalTime += (st.endTimeLabSec2.getTime() - st.startTimeLabSec2.getTime());
 		}
 
@@ -397,62 +410,52 @@ public class ModellingObjectivesV2 {
 		return ((totalTime / (1000 * 60 * 60)));
 	}
 
-	
-	
-
 	public void PrintAllTeacherInfo() {
 
 		class TeacherKey implements Comparable<TeacherKey> {
 			String teacherName, day;
 
-		
 			public TeacherKey(String teacherName, String day) {
 				super();
 				this.teacherName = teacherName;
 				this.day = day;
 			}
 
-
 			public String getTeacherName() {
 				return teacherName;
 			}
-
 
 			public void setTeacherName(String teacherName) {
 				this.teacherName = teacherName;
 			}
 
-
 			public String getDay() {
 				return day;
 			}
-
 
 			public void setDay(String day) {
 				this.day = day;
 			}
 
-
 			@Override
 			public int compareTo(TeacherKey o1) {
 				int value1 = this.getTeacherName().compareTo(o1.getTeacherName());
 				if (value1 == 0) {
-						try {
-							SimpleDateFormat format = new SimpleDateFormat("EEE");
-							Date d1 = format.parse(this.getDay());
-							Date d2 = format.parse(o1.getDay());
-							Calendar cal1 = Calendar.getInstance();
-							Calendar cal2 = Calendar.getInstance();
-							cal1.setTime(d1);
-							cal2.setTime(d2);
-							return cal1.get(Calendar.DAY_OF_WEEK) - cal2.get(Calendar.DAY_OF_WEEK);
-						} catch (ParseException pe) {
-							throw new RuntimeException(pe);
-						}
-					} else {
-						return value1;
+					try {
+						SimpleDateFormat format = new SimpleDateFormat("EEE");
+						Date d1 = format.parse(this.getDay());
+						Date d2 = format.parse(o1.getDay());
+						Calendar cal1 = Calendar.getInstance();
+						Calendar cal2 = Calendar.getInstance();
+						cal1.setTime(d1);
+						cal2.setTime(d2);
+						return cal1.get(Calendar.DAY_OF_WEEK) - cal2.get(Calendar.DAY_OF_WEEK);
+					} catch (ParseException pe) {
+						throw new RuntimeException(pe);
 					}
-
+				} else {
+					return value1;
+				}
 
 			}
 
@@ -461,13 +464,13 @@ public class ModellingObjectivesV2 {
 		List sortedKeys = new ArrayList<TeacherKey>();
 		for (MultiKey key : mapForTeacherTiming.keySet()) {
 			String tn, day;
-			if(key.getKey(0)!=null) {
+			if (key.getKey(0) != null) {
 				tn = key.getKey(0).toString();
 				day = key.getKey(1).toString();
 				TeacherKey k = new TeacherKey(tn, day);
 				sortedKeys.add(k);
 			}
-			
+
 		}
 
 		Collections.sort(sortedKeys);
@@ -475,22 +478,18 @@ public class ModellingObjectivesV2 {
 		for (int i = 0; i < sortedKeys.size(); i++) {
 			TeacherKey key = (TeacherKey) sortedKeys.get(i);
 
-			TeacherTiming tt = mapForTeacherTiming
-					.get(new MultiKey(key.getTeacherName(),  key.getDay()));
-			
+			TeacherTiming tt = mapForTeacherTiming.get(new MultiKey(key.getTeacherName(), key.getDay()));
+
 			SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-			if(tt.getStartTime()!=null)
-				System.out.println(key.getTeacherName() + " " + key.getDay() + " "
-					+ dateFormat.format(tt.startTime) + " " + dateFormat.format(tt.endTime));
-			if(tt.getStartTime()==null)
-				System.out.println(key.getTeacherName() + " "  + key.getDay() + " "
-					+ "null" + " " + "null");
+			if (tt.getStartTime() != null)
+				System.out.println(key.getTeacherName() + " " + key.getDay() + " " + dateFormat.format(tt.startTime)
+						+ " " + dateFormat.format(tt.endTime));
+			if (tt.getStartTime() == null)
+				System.out.println(key.getTeacherName() + " " + key.getDay() + " " + "null" + " " + "null");
 
 		}
 	}
 
-	
-	
 	public void PrintAllInfo() {
 
 		class Key implements Comparable<Key> {
@@ -573,61 +572,65 @@ public class ModellingObjectivesV2 {
 
 			StudentTimingConsideringLabSections st = mapForStudentTiming
 					.get(new MultiKey(key.getYearSemester(), key.getSection(), key.getDay()));
-			
-			SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-			if(st.getStartTimeLabSec1()!=null)
-				System.out.println(key.getYearSemester() + " " + key.getSection()+"1" + " " + key.getDay() + " "
-					+ dateFormat.format(st.startTimeLabSec1) + " " + dateFormat.format(st.endTimeLabSec1));
-			if(st.getStartTimeLabSec1()==null)
-				System.out.println(key.getYearSemester() + " " + key.getSection()+"1" + " " + key.getDay() + " "
-					+ "null" + " " + "null");
 
-			if(st.getStartTimeLabSec2()!=null)
-				System.out.println(key.getYearSemester() + " " + key.getSection()+"2" + " " + key.getDay() + " "
-					+ dateFormat.format(st.startTimeLabSec2) + " " + dateFormat.format(st.endTimeLabSec2));
-			if(st.getStartTimeLabSec2()==null)
-				System.out.println(key.getYearSemester() + " " + key.getSection()+"2" + " " + key.getDay() + " "
-					+ "null" + " " + "null");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+			if (st.getStartTimeLabSec1() != null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + "1" + " " + key.getDay() + " "
+						+ dateFormat.format(st.startTimeLabSec1) + " " + dateFormat.format(st.endTimeLabSec1));
+			if (st.getStartTimeLabSec1() == null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + "1" + " " + key.getDay() + " "
+						+ "null" + " " + "null");
+
+			if (st.getStartTimeLabSec2() != null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + "2" + " " + key.getDay() + " "
+						+ dateFormat.format(st.startTimeLabSec2) + " " + dateFormat.format(st.endTimeLabSec2));
+			if (st.getStartTimeLabSec2() == null)
+				System.out.println(key.getYearSemester() + " " + key.getSection() + "2" + " " + key.getDay() + " "
+						+ "null" + " " + "null");
 			System.out.println();
 		}
 	}
-	
+
 	void readTeacherAssignedCourseInfoFromFile() {
-		  BufferedReader br = null;
-		    String line = "";
-		    String csvFile = "TeacherAssingedCourseInfo.csv";
-		    String cvsSplitBy = ",";
-		    
-			teacherAssignedCourseInfo = new ArrayList<TeacherAssignedCourseInfo>();
-			try {
+		BufferedReader br = null;
+		String line = "";
+		String csvFile = "TeacherAssingedCourseInfo.csv";
+		String cvsSplitBy = ",";
+
+		teacherAssignedCourseInfo = new ArrayList<TeacherAssignedCourseInfo>();
+		try {
 			br = new BufferedReader(new FileReader(csvFile));
-			line = br.readLine(); 
+			line = br.readLine();
 			while ((line = br.readLine()) != null) {
 
-	          // use comma as separator
-	          String[] info = line.split(cvsSplitBy);
+				// use comma as separator
+				String[] info = line.split(cvsSplitBy);
 
-	          TeacherAssignedCourseInfo teacherInfo = new TeacherAssignedCourseInfo(
-	          		info[0], info[1], info[2], info[3] );
+				TeacherAssignedCourseInfo teacherInfo = new TeacherAssignedCourseInfo(info[0], info[1], info[2],
+						info[3]);
 
-	          teacherAssignedCourseInfo.add(teacherInfo);
+				teacherAssignedCourseInfo.add(teacherInfo);
 			}
-			}catch(IOException e) {
-				e.printStackTrace();
-			}
-	      }
-	
-	String getTeacherNameAssignedForACourse(CourseInfo courseInfo) {
-		int i=0;
-		for(;i<teacherAssignedCourseInfo.size();i++) {
-			if(teacherAssignedCourseInfo.get(i).getAssignedCourseNo().equals(courseInfo.getCourseNo())
-					&& teacherAssignedCourseInfo.get(i).getAssignedCourseSection().equals(courseInfo.getAssignedSection())
-					&& teacherAssignedCourseInfo.get(i).getAssignedCourseStudentGroup().equals(courseInfo.getAssignedLabSection()) )
-				break;
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		if(i<teacherAssignedCourseInfo.size())
-			return teacherAssignedCourseInfo.get(i).getTeacherName();
-		else return null;
+	}
+
+	ArrayList<String> getTeacherNameAssignedForACourse(CourseInfo courseInfo) {
+		ArrayList<String> teacherNames = new ArrayList<String>();
+		int i = 0;
+		for (; i < teacherAssignedCourseInfo.size(); i++) {
+			if (teacherAssignedCourseInfo.get(i).getAssignedCourseNo().equals(courseInfo.getCourseNo())
+					&& teacherAssignedCourseInfo.get(i).getAssignedCourseSection()
+							.equals(courseInfo.getAssignedSection())
+					&& teacherAssignedCourseInfo.get(i).getAssignedCourseStudentGroup()
+							.equals(courseInfo.getAssignedLabSection()))
+				teacherNames.add(teacherAssignedCourseInfo.get(i).getTeacherName());
+		}
+		if (teacherNames.size() > 0)
+			return teacherNames;
+		else
+			return null;
 	}
 
 }
