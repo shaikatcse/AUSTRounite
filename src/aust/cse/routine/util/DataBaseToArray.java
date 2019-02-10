@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import aust.cse.routine.problem.multiObjective.withoutDataBase.ModellingConstraints;
 import aust.cse.routine.problem.multiObjective.withoutDataBase.ModellingObjectives;
 import aust.cse.routine.problem.multiObjective.withoutDataBase.ModellingObjectivesV2;
 import jmetal.core.Solution;
@@ -21,7 +22,7 @@ public class DataBaseToArray {
 	ArrayList<SlotInfo> slotInfo;
 
 	ModellingObjectivesV2 modellingObjectives;
-	
+	ModellingConstraints modellingConstraints;
 	public Connection connectDatabase() {
 		try{
             Class.forName("org.sqlite.JDBC");
@@ -37,6 +38,8 @@ public class DataBaseToArray {
 		dbConnection = connectDatabase();
 		
 		modellingObjectives= new ModellingObjectivesV2();
+		modellingConstraints = new ModellingConstraints();
+		
 		//read courseInfo from courInfo.csv file
 	    readCourseInfoFromFile();
 
@@ -89,6 +92,7 @@ public class DataBaseToArray {
 				SlotInfo s = getSlotInfo(slotId);
 				
 				modellingObjectives.fillUpTheMap(s, c);
+				modellingConstraints.updateAllMaps(c, s);
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
