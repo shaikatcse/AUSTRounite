@@ -64,6 +64,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	ArrayList<SlotInfo> slotInfo;
 	
 	ModellingObjectivesV2 modellingObjectives;
+	ModellingConstraints modellingConstraints;
 	
 	int numberOfDatabaseAccess=0;
 	
@@ -823,11 +824,10 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
   public AUSTCSERoutineMultiObjectiveProblemV2(String solutionType) {
     
 	  
-	  numberOfVariables_  = 1;
+	numberOfVariables_  = 1;
     numberOfObjectives_ = 2;
     numberOfConstraints_= 3;
     problemName_        = "AUSTCSERoutineProblem";
-
     solutionType_ = new PermutationSolutionType(this) ;
 
     length_       = new int[numberOfVariables_];
@@ -835,9 +835,13 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
     //connect the database
     dbConnection=connectDatabase();
     
-    //modelling objective
-   // modellingObjectives = new ModellingObjectives();
-    
+        
+   // modelling objective
+   modellingObjectives = new ModellingObjectivesV2();
+   
+   //modeliing constraints
+   modellingConstraints = new ModellingConstraints();
+   
     //read courseInfo from courInfo.csv file
     readCourseInfoFromFile();
 
@@ -948,7 +952,6 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	    bigInsertQuery="INSERT INTO 'CourseClassroomTimeslot'";
 	    //forint i=0; i<length; i++) {
 	    	
-	    modellingObjectives = new ModellingObjectivesV2();
 	    
 	    for(int i=0; i<500; i++) {
 	    	
@@ -956,6 +959,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	    	courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, ((Permutation)solution.getDecisionVariables()[0]).vector_[i]);
 	    	
 	    	modellingObjectives.fillUpTheMap(slotInfo, courseInfo);
+	    	modellingConstraints.updateAllMaps(slotInfo, courseInfo);
 	    	
 	    	if(i==0) {
 	    		bigInsertQuery=bigInsertQuery +" SELECT '" +courseInfo.getCourseNo() +"' AS 'courseNo', '"+slotInfo.getSlotID()+"' AS 'slotId', '"+slotInfo.getRoomNo()+"' AS 'RoomNo', '"+ courseInfo.getAssignedSection() +"' AS 'Section' ,'"+courseInfo.getAssignedLabSection()+ "' AS 'StudentGroup' ,'"+slotInfo.getSession()+"' AS 'Session'";		

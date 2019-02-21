@@ -26,7 +26,7 @@ public class DataBaseToArray {
 	public Connection connectDatabase() {
 		try{
             Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\shaik\\Desktop\\Spring18OriginalRoutine.sqlite");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\shaik\\Desktop\\Spring18OriginalRoutine1.sqlite");
             return conn;
         }catch(Exception e){
             e.printStackTrace();
@@ -82,7 +82,9 @@ public class DataBaseToArray {
 			PreparedStatement statement = dbConnection.prepareStatement(query);
 			
 			ResultSet rs = statement.executeQuery();
+			int i=1;
 			while (rs.next()) {
+				System.out.println(i);
 				String courseNo=rs.getString("CourseNo");
 				String section = rs.getString("Section");
 				String studentGroup = rs.getString("StudentGroup");
@@ -91,8 +93,13 @@ public class DataBaseToArray {
 				CourseInfo c = getCourseInfo(courseNo, section, studentGroup);
 				SlotInfo s = getSlotInfo(slotId);
 				
+				if(i==45 || i==21) {
+					System.out.println("watch out");
+				}
 				modellingObjectives.fillUpTheMap(s, c);
-				modellingConstraints.updateAllMaps(c, s);
+				modellingConstraints.updateAllMaps(s, c);
+				i++;
+			
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
