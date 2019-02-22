@@ -326,11 +326,7 @@ public class ModellingObjectivesV2 {
 				for (int i = 0; i < getTeacherNameAssignedForACourse(courseInfo).size(); i++) {
 					MultiKey teacherKey = new MultiKey(getTeacherNameAssignedForACourse(courseInfo).get(i),
 							slotInfo.getDay());
-					if (getTeacherNameAssignedForACourse(courseInfo).get(i) != null
-							&& getTeacherNameAssignedForACourse(courseInfo).get(i).equals("Dr. Mohammad Shafiul Alam")
-							&& slotInfo.getDay().equals("Sunday"))
-						System.out.println("");
-
+				
 					Date teacherEndTime = null;
 					Calendar calTeacher = Calendar.getInstance();
 					Date startTimeTeacher = null;
@@ -394,7 +390,7 @@ public class ModellingObjectivesV2 {
 		
 	}
 
-	public double calculateTotalTime() {
+	public double calculateTotalStudentsTime() {
 		long totalTime = 0;
 		for (MultiKey key : mapForStudentTiming.keySet()) {
 			StudentTimingConsideringLabSections st = mapForStudentTiming.get(key);
@@ -407,7 +403,18 @@ public class ModellingObjectivesV2 {
 		PrintAllInfo();
 		PrintAllTeacherInfo();
 
-		return ((totalTime / (1000 * 60 * 60)));
+		return (totalTime / (1000 * 60 * 60));
+	}
+	
+	public double calculateTotalTeachertime() {
+		long totalTime = 0;
+		for (MultiKey key : mapForTeacherTiming.keySet()) {
+			TeacherTiming tt = mapForTeacherTiming.get(key);
+			if(tt.getStartTime() != null && tt.getEndTime()!= null) {
+				totalTime += (tt.getEndTime().getTime() - tt.getStartTime().getTime());
+			}
+		}
+		return (totalTime / (1000 * 60 * 60));
 	}
 
 	public void PrintAllTeacherInfo() {

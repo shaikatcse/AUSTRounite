@@ -95,13 +95,25 @@ public class ModellingConstraints {
 		// constraints: calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab:
 		if (!courseInfo.getCourseNo().equals("freetime")) {
 			if (courseInfo.getCourseType().equals("Theory")) {
-				MultiKey keyForTheoryCourseCount = new MultiKey(courseInfo.getCourseYearSemester(),
-						courseInfo.getAssignedSection(), slotInfo.getDay());
-				if (!mapForNoOfTheoryForStudent.containsKey(keyForTheoryCourseCount)) {
-					mapForNoOfTheoryForStudent.put(keyForTheoryCourseCount, 1);
+				//key for 1 section, ex; A1, B1, ..
+				MultiKey keyForTheoryCourseCountSec1 = new MultiKey(courseInfo.getCourseYearSemester(),
+						courseInfo.getAssignedSection(),"1", slotInfo.getDay());
+				//key for 2 section, ex; A2, B2, ..
+				MultiKey keyForTheoryCourseCountSec2 = new MultiKey(courseInfo.getCourseYearSemester(),
+						courseInfo.getAssignedSection(),"2", slotInfo.getDay());
+
+				if (!mapForNoOfTheoryForStudent.containsKey(keyForTheoryCourseCountSec1)) {
+					mapForNoOfTheoryForStudent.put(keyForTheoryCourseCountSec1, 1);
 				} else {
-					Integer numberOfTheory = mapForNoOfTheoryForStudent.get(keyForTheoryCourseCount) + 1;
-					mapForNoOfTheoryForStudent.put(keyForTheoryCourseCount, numberOfTheory);
+					Integer numberOfTheory = mapForNoOfTheoryForStudent.get(keyForTheoryCourseCountSec1) + 1;
+					mapForNoOfTheoryForStudent.put(keyForTheoryCourseCountSec1, numberOfTheory);
+				}
+				
+				if (!mapForNoOfTheoryForStudent.containsKey(keyForTheoryCourseCountSec2)) {
+					mapForNoOfTheoryForStudent.put(keyForTheoryCourseCountSec2, 1);
+				} else {
+					Integer numberOfTheory = mapForNoOfTheoryForStudent.get(keyForTheoryCourseCountSec2) + 1;
+					mapForNoOfTheoryForStudent.put(keyForTheoryCourseCountSec2, numberOfTheory);
 				}
 			}
 			if ((courseInfo.getCourseType().equals("Lab") && courseInfo.getAssignedLabSection().equals("1"))
@@ -126,9 +138,6 @@ public class ModellingConstraints {
 				MultiKey keyForLabCourseCountSec2 = new MultiKey(courseInfo.getCourseYearSemester(),
 						courseInfo.getAssignedSection(), "2", slotInfo.getDay());
 
-				
-				
-				
 				
 				if (!mapForNoOfLabForStudent.containsKey(keyForLabCourseCountSec1)) {
 					mapForNoOfLabForStudent.put(keyForLabCourseCountSec1, 1);
@@ -157,13 +166,13 @@ public class ModellingConstraints {
 				if (!mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay
 						.containsKey(keyForRoomSession)) {
 					HashSet<String> yearSemInASession = new HashSet();
-					yearSemInASession.add(courseInfo.getCourseYearSemester());
+					yearSemInASession.add(courseInfo.getCourseYearSemester()+courseInfo.getAssignedSection());
 					mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay
 							.put(keyForRoomSession, yearSemInASession);
 				} else {
 					HashSet<String> yearSemInASession = mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay
 							.get(keyForRoomSession);
-					yearSemInASession.add(courseInfo.getCourseYearSemester());
+					yearSemInASession.add(courseInfo.getCourseYearSemester()+courseInfo.getAssignedSection());
 				}
 			}
 		}
@@ -297,6 +306,58 @@ public class ModellingConstraints {
 			}
 		}
 	}
+	
+	double calculatingConstraintsOfSameTimeClassForATeacher() {
+		double constarintViolation = 0.0;
+		for (MultiKey key : mapForCalculatingConstraintsOfSameTimeClassForATeacher.keySet()) {
+			constarintViolation += mapForCalculatingConstraintsOfSameTimeClassForATeacher.get(key).numberOfConflicts;
+		}
+		return constarintViolation;
+	}
+	
+	double calculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay() {
+		double constarintViolation = 0.0;
+		for(MultiKey key: mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay.keySet()) {
+			HashSet<String> hs = mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay.get(key);
+			constarintViolation += (hs.size() -1);
+		}
+		return constarintViolation;
+	}
+	
+	double calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab() {
+		double constraintViolation = 0.0;
+		for(MultiKey key: mapForNoOfTheoryForStudent.keySet()) {
+			int noOfTheory = mapForNoOfTheoryForStudent.get(key);
+			int noOfLab = 0;
+			if(mapForNoOfLabForStudent.containsKey(key))
+				noOfLab = mapForNoOfLabForStudent.get(key);
+			
+			if(noOfTheory>4 && noOfLab>1)
+				constraintViolation+=1;
+		}
+		return constraintViolation;
+	}
+	
+	double calculateConstraintsNotMoreThanFourTheoryClassAndOneLab() {
+		double constraintViolation = 0.0;
+		for(MultiKey key: mapForNoOfTheoryForStudent.keySet()) {
+			int noOfTheory = mapForNoOfTheoryForStudent.get(key);
+			if(noOfTheory>4 )
+				constraintViolation+=1;
+		}
+		return constraintViolation;
+	}
+	double calculateConstraintsNotMoreThanTwoLabClassAndOneLab() {
+		double constraintViolation = 0.0;
+		for(MultiKey key: mapForNoOfLabForStudent.keySet()) {
+			int noOfLab = mapForNoOfLabForStudent.get(key);
+			if(noOfLab>2 )
+				constraintViolation+=1;
+		}
+		return constraintViolation;
+	}
+	
+	
 
 	void readTeacherAssignedCourseInfoFromFile() {
 		BufferedReader br = null;
