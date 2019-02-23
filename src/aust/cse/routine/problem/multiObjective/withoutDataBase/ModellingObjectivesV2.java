@@ -114,6 +114,11 @@ public class ModellingObjectivesV2 {
 		
 	
 	}
+	
+	public void clearAllMaps() {
+		mapForStudentTiming.clear();
+		mapForTeacherTiming.clear();
+	}
 
 	boolean WhichTimeIsBefore(Date t1, Date t2) {
 		// return true is t1 is before, else return false
@@ -400,8 +405,8 @@ public class ModellingObjectivesV2 {
 				totalTime += (st.endTimeLabSec2.getTime() - st.startTimeLabSec2.getTime());
 		}
 
-		PrintAllInfo();
-		PrintAllTeacherInfo();
+	//	PrintAllInfo();
+	//	PrintAllTeacherInfo();
 
 		return (totalTime / (1000 * 60 * 60));
 	}

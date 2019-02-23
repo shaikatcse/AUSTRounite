@@ -456,7 +456,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	  
 	numberOfVariables_  = 1;
     numberOfObjectives_ = 2;
-    numberOfConstraints_= 5;
+    numberOfConstraints_= 2;
     problemName_        = "AUSTCSERoutineProblem";
     solutionType_ = new PermutationSolutionType(this) ;
 
@@ -582,6 +582,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
     solution.setObjective(0, obj1);
     solution.setObjective(1, -1*obj2);
   
+    modellingObjectives.clearAllMaps();
   } // evaluate
 
   
@@ -589,7 +590,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 		double totalConstraints = 0;
 		int numberOfConstraints = 0;
 
-		double calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab = 
+		/*double calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab = 
 				modellingConstraints.calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab();
 		if (calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab > 0.0) {
 			totalConstraints += (-1 * calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab);
@@ -608,7 +609,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 		if(calculateConstraintsNotMoreThanFourTheoryClassAndOneLab > 0) {
 			totalConstraints += (-1*calculateConstraintsNotMoreThanFourTheoryClassAndOneLab);
 			numberOfConstraints ++;
-		}
+		}*/
 		
 				
 		double calculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay = 
@@ -627,7 +628,9 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 		
 		solution.setOverallConstraintViolation(totalConstraints);
 		solution.setNumberOfViolatedConstraint(numberOfConstraints);
-	}
+		
+		modellingConstraints.clearAllMaps();
+  }
 
 
  boolean isItATheoryCourse(int courseId) {

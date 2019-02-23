@@ -62,17 +62,17 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
 
     HashMap  parameters ; // Operator parameters
         
-    for(int i=0;i<5;i++) {
+    for(int i=0;i<1;i++) {
 
-    	String resultPath=".\\results\\demo\\run"+i;
+    	String resultPath=".\\results\\testV2\\run"+i;
     problem = new AUSTCSERoutineMultiObjectiveProblemV2("Permutation");
     
     algorithm = new NSGAII(problem, resultPath);
     //algorithm = new gGA(problem) ;
     
     // Algorithm params
-    algorithm.setInputParameter("populationSize",10);
-    algorithm.setInputParameter("maxEvaluations",100);
+    algorithm.setInputParameter("populationSize",300);
+    algorithm.setInputParameter("maxEvaluations",240000);
     
     // Mutation and Crossover for Real codification
     parameters = new HashMap() ;
@@ -109,6 +109,13 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
     population.printFeasibleVAR(resultPath+"\\FIS_VAR_NSGAII");
     population.printFeasibleFUN(resultPath+"\\FIS_FUN_NSGAII");
     
+   /* System.out.println("Objectives values have been writen to file FUN");
+    population.printObjectivesToFile("FUN_NSGAII");
+    System.out.println("Variables values have been writen to file VAR");
+    population.printVariablesToFile("VAR_NSGAII");          
+    population.printFeasibleVAR("FIS_VAR_NSGAII");
+    population.printFeasibleFUN("FIS_FUN_NSGAII");
+    */
 
 }
   }//main

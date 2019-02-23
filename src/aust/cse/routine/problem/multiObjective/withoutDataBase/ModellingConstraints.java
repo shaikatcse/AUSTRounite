@@ -90,6 +90,14 @@ public class ModellingConstraints {
 		mapForCalculatingConstraintsOfSameTimeClassForATeacher = new MultiKeyMap<MultiKey, TeacherClassTimingForConstraintHandeling>();
 		readTeacherAssignedCourseInfoFromFile();
 	}
+	
+	public void clearAllMaps() {
+		mapForNoOfTheoryForStudent.clear();
+		mapForNoOfLabForStudent.clear();
+		mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay.clear();
+		mapForCalculatingConstraintsOfSameTimeClassForATeacher.clear();
+
+	}
 
 	public void updateAllMaps(SlotInfo slotInfo, CourseInfo courseInfo) {
 		// constraints: calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab:
@@ -307,15 +315,18 @@ public class ModellingConstraints {
 		}
 	}
 	
-	double calculatingConstraintsOfSameTimeClassForATeacher() {
+	public double calculatingConstraintsOfSameTimeClassForATeacher() {
 		double constarintViolation = 0.0;
 		for (MultiKey key : mapForCalculatingConstraintsOfSameTimeClassForATeacher.keySet()) {
+			/*if(mapForCalculatingConstraintsOfSameTimeClassForATeacher.get(key).numberOfConflicts==1) {
+				System.out.println("hhh");
+			}*/
 			constarintViolation += mapForCalculatingConstraintsOfSameTimeClassForATeacher.get(key).numberOfConflicts;
 		}
 		return constarintViolation;
 	}
 	
-	double calculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay() {
+	public  double calculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay() {
 		double constarintViolation = 0.0;
 		for(MultiKey key: mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay.keySet()) {
 			HashSet<String> hs = mapForcalculatingConstraintsForAllTheoryClassesMustBeExecuteInTheSameRoomInASessionInADay.get(key);
@@ -324,7 +335,7 @@ public class ModellingConstraints {
 		return constarintViolation;
 	}
 	
-	double calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab() {
+	public double calculateConstraintsNotMoreThanThreeTheoryClassAndOneLab() {
 		double constraintViolation = 0.0;
 		for(MultiKey key: mapForNoOfTheoryForStudent.keySet()) {
 			int noOfTheory = mapForNoOfTheoryForStudent.get(key);
@@ -338,7 +349,7 @@ public class ModellingConstraints {
 		return constraintViolation;
 	}
 	
-	double calculateConstraintsNotMoreThanFourTheoryClassAndOneLab() {
+	public double calculateConstraintsNotMoreThanFourTheoryClassAndOneLab() {
 		double constraintViolation = 0.0;
 		for(MultiKey key: mapForNoOfTheoryForStudent.keySet()) {
 			int noOfTheory = mapForNoOfTheoryForStudent.get(key);
@@ -347,7 +358,7 @@ public class ModellingConstraints {
 		}
 		return constraintViolation;
 	}
-	double calculateConstraintsNotMoreThanTwoLabClassAndOneLab() {
+	public double calculateConstraintsNotMoreThanTwoLabClassAndOneLab() {
 		double constraintViolation = 0.0;
 		for(MultiKey key: mapForNoOfLabForStudent.keySet()) {
 			int noOfLab = mapForNoOfLabForStudent.get(key);
@@ -398,7 +409,6 @@ public class ModellingConstraints {
 		if (teacherNames.size() > 0)
 			return teacherNames;
 		else {
-			System.out.println("stop");
 			return null;
 		}
 	}

@@ -63,6 +63,11 @@ public class NSGAII extends Algorithm {
 		file = new File(folderForGenerationData);
 		file.mkdirs();
 	} // NSGAII
+	
+	public NSGAII(Problem problem) {
+		super(problem);
+	
+	} // NSGAII
 
 	void writeGenerationalDataToFile(int generationNo, SolutionSet s) {
 		FileWriter f;
@@ -192,7 +197,7 @@ public class NSGAII extends Algorithm {
 		//write to file
 		Ranking r = new Ranking(population);
 		
-		writeGenerationalDataToFile(evaluations/populationSize, r.getSubfront(0));
+		//writeGenerationalDataToFile(evaluations/populationSize, r.getSubfront(0));
 		
 		{
 			Calendar cal = Calendar.getInstance();
@@ -211,7 +216,7 @@ public class NSGAII extends Algorithm {
 		// Generations
 		while (evaluations < maxEvaluations) {
 
-			if (evaluations % 1000 == 0) {
+			if (evaluations % 10000 == 0) {
 				Calendar cal = Calendar.getInstance();
 				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 				System.out.println("TIme:" + sdf.format(cal.getTime()) + "-> " + evaluations);
@@ -298,9 +303,9 @@ public class NSGAII extends Algorithm {
 				remain = 0;
 			} // if
 
-			Ranking r2=new Ranking(population);
+			/*Ranking r2=new Ranking(population);
 			writeGenerationalDataToFile(evaluations/populationSize, r2.getSubfront(0));
-			System.out.println("Duplicate after ranking: " + howManyDuplicate(population));
+			System.out.println("Duplicate after ranking: " + howManyDuplicate(population));*/
 
 			// This piece of code shows how to use the indicator object into the code
 			// of NSGA-II. In particular, it finds the number of evaluations required
