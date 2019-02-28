@@ -170,7 +170,7 @@ public class NSGAIISC extends Algorithm {
         } // for
         
         //tracking
-        if(front.size()>=populationSize) {
+        //if(front.size()>=populationSize) {
         	double sum=0.0;
         	int numOfV=0;
         	for(int i=0;i<populationSize;i++) {
@@ -181,7 +181,7 @@ public class NSGAIISC extends Algorithm {
         	}
         	System.out.println("Generation: "+evaluations/populationSize+" avg cons: "+(sum)/(double)numOfV
         			+" numberofV: "+numOfV);
-        }
+        //}
         
         remain = 0;
       } // if                               

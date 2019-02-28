@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package aust.cse.routine.problem.multiObjective.withoutDataBase;
+package aust.cse.softConstraints.problem;
 
 
 import jmetal.core.Problem;
@@ -41,13 +41,16 @@ import java.util.Random;
 
 import javax.swing.JOptionPane;
 
+import aust.cse.routine.problem.multiObjective.withoutDataBase.ModellingConstraints;
+import aust.cse.routine.problem.multiObjective.withoutDataBase.ModellingObjectivesV2;
+import aust.cse.routine.problem.multiObjective.withoutDataBase.ModellingSoftConstraints;
 import aust.cse.routine.util.CourseInfo;
 import aust.cse.routine.util.SlotInfo;
 
 /**
  * Class representing a TSP (Traveling Salesman Problem) problem.
  */
-public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
+public class AUSTCSERoutineMultiObjectiveProblemV2WithSC extends Problem {
 
 	
 	final int numberOfTheorySlots=378;
@@ -58,14 +61,13 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	final int numberOfTheorySession = 100;
 	
 	
-	Connection dbConnection;
 	
 	ArrayList<CourseInfo> courseInfo;
 	ArrayList<SlotInfo> slotInfo;
 	
 	ModellingObjectivesV2 modellingObjectives;
 	ModellingConstraints modellingConstraints;
-	
+	ModellingSoftConstraints modellingSoftConstraints;
 	
 	boolean searchATheoryCourseInVector(int []vector, int courseId) {
 		//search the vector for the course
@@ -451,12 +453,13 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
    * Creates a new TSP problem instance. It accepts data files from TSPLIB
    * @param filename The file containing the definition of the problem
    */
-  public AUSTCSERoutineMultiObjectiveProblemV2(String solutionType) {
+  public AUSTCSERoutineMultiObjectiveProblemV2WithSC(String solutionType) {
     
 	  
 	numberOfVariables_  = 1;
     numberOfObjectives_ = 2;
-    numberOfConstraints_= 5;
+    numberOfConstraints_= 0;
+    numberOfSoftConstraints_=1;
     problemName_        = "AUSTCSERoutineProblem";
     solutionType_ = new PermutationSolutionType(this) ;
 
@@ -468,6 +471,9 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
    
    //modeliing constraints
    modellingConstraints = new ModellingConstraints();
+   
+ //modeliing soft constraints
+   modellingSoftConstraints = new ModellingSoftConstraints();
    
     //read courseInfo from courInfo.csv file
     readCourseInfoFromFile();
@@ -554,8 +560,8 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 	    	courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, ((Permutation)solution.getDecisionVariables()[0]).vector_[i]);
 	    	
 	    	modellingObjectives.fillUpTheMap(slotInfo, courseInfo);
-	    	modellingConstraints.updateAllMaps(slotInfo, courseInfo);
-	    	
+	    	//modellingConstraints.updateAllMaps(slotInfo, courseInfo);
+	    	modellingSoftConstraints.updateAllMaps(slotInfo, courseInfo);
 	    	
 	    
 	    }
@@ -632,6 +638,21 @@ public class AUSTCSERoutineMultiObjectiveProblemV2 extends Problem {
 		modellingConstraints.clearAllMaps();
   }
 
+  public void evaluateSoftConstraints(Solution solution) throws JMException {
+	  double totalConstraints = 0;
+		int numberOfConstraints = 0;
+		double calculateConstraintsOfTeacherPreferredSlots =
+		modellingSoftConstraints.calculateConstraintsOfTeacherPreferredSlots();
+		if(calculateConstraintsOfTeacherPreferredSlots>0) {
+			totalConstraints += (-1*calculateConstraintsOfTeacherPreferredSlots);
+			numberOfConstraints++;
+		}
+		solution.setOverallSoftConstraintViolation(totalConstraints);
+		solution.setNumberOfViolatedSoftConstraint(numberOfConstraints);
+		
+		modellingSoftConstraints.clearAllMaps();
+  }
+  
 
  boolean isItATheoryCourse(int courseId) {
 	 CourseInfo aCourse = CourseInfo.srachCourseInfoArryList(courseInfo, courseId);

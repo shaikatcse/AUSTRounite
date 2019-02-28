@@ -216,10 +216,7 @@ public class NSGAII extends Algorithm {
 		// Generations
 		while (evaluations < maxEvaluations) {
 
-			if (evaluations % 10000 == 0) {
-				Calendar cal = Calendar.getInstance();
-				SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-				System.out.println("TIme:" + sdf.format(cal.getTime()) + "-> " + evaluations);
+			if (evaluations % 21000 == 0) {
 				for (int i = 0; i < population.size(); i++) {
 					System.out.print(population.get(i).getOverallConstraintViolation() + " ");
 					System.out.println("Obj1: " + population.get(i).getObjective(0) + "Obj2: "
@@ -257,8 +254,8 @@ public class NSGAII extends Algorithm {
 				} // if
 			} // for
 
-			System.out.println(
-					"Duplicate after offspring creation: " + howManyDuplicate(population.union(offspringPopulation)));
+//			System.out.println(
+	//				"Duplicate after offspring creation: " + howManyDuplicate(population.union(offspringPopulation)));
 
 			// Create the solutionSet union of solutionSet and offSpring
 			union = ((SolutionSet) population).union(offspringPopulation);

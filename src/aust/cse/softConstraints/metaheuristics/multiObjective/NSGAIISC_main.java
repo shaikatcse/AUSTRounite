@@ -41,6 +41,8 @@ import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 
+import aust.cse.routine.problem.multiObjective.withoutDataBase.AUSTCSERoutineMultiObjectiveProblemV2;
+import aust.cse.softConstraints.problem.AUSTCSERoutineMultiObjectiveProblemV2WithSC;
 import aust.cse.softConstraints.problem.ConstrExSC;
 import aust.cse.softConstraints.problem.TanakaSC;
 import aust.cse.softConstraints.util.comparators.DominanceComparatorSC;
@@ -114,6 +116,9 @@ public class NSGAIISC_main {
       
       //problem = new OKA2("Real") ;
     } // else
+    int i=0;
+    String resultPath=".\\results\\testV2\\run"+i;
+    problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
     
     algorithm = new NSGAIISC(problem);
     //algorithm = new ssNSGAII(problem);
@@ -126,12 +131,12 @@ public class NSGAIISC_main {
     parameters = new HashMap() ;
     parameters.put("probability", 0.9) ;
     parameters.put("distributionIndex", 10.0) ;
-    crossover = CrossoverFactory.getCrossoverOperator("SBXCrossover", parameters);                   
+    crossover = CrossoverFactory.getCrossoverOperator("TwoPointsCrossover", parameters);                   
 
     parameters = new HashMap() ;
     parameters.put("probability", 1.0/problem.getNumberOfVariables()) ;
     parameters.put("distributionIndex", 10.0) ;
-    mutation = MutationFactory.getMutationOperator("PolynomialMutation", parameters);                    
+    mutation = MutationFactory.getMutationOperator("SwapMutation", parameters);                    
 
     // Selection Operator 
     parameters = new HashMap() ;

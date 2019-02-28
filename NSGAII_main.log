@@ -2,36 +2,13 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2018-11-26T19:32:58</date>
-  <millis>1543257178646</millis>
+  <date>2019-02-28T16:24:42</date>
+  <millis>1551367482115</millis>
   <sequence>0</sequence>
   <logger>jMetal</logger>
-  <level>INFO</level>
-  <class>aust.cse.softConstraints.metaheuristics.multiObjective.NSGAIISC_main</class>
-  <method>main</method>
+  <level>SEVERE</level>
+  <class>jmetal.operators.crossover.SBXCrossover</class>
+  <method>execute</method>
   <thread>1</thread>
-  <message>Total execution time: 847ms</message>
+  <message>SBXCrossover.execute: the solutions type jmetal.encodings.solutionType.PermutationSolutionType@13805618 is not allowed with this operator</message>
 </record>
-<record>
-  <date>2018-11-26T19:32:58</date>
-  <millis>1543257178688</millis>
-  <sequence>1</sequence>
-  <logger>jMetal</logger>
-  <level>INFO</level>
-  <class>aust.cse.softConstraints.metaheuristics.multiObjective.NSGAIISC_main</class>
-  <method>main</method>
-  <thread>1</thread>
-  <message>Variables values have been writen to file VAR</message>
-</record>
-<record>
-  <date>2018-11-26T19:32:58</date>
-  <millis>1543257178696</millis>
-  <sequence>2</sequence>
-  <logger>jMetal</logger>
-  <level>INFO</level>
-  <class>aust.cse.softConstraints.metaheuristics.multiObjective.NSGAIISC_main</class>
-  <method>main</method>
-  <thread>1</thread>
-  <message>Objectives values have been writen to file FUN</message>
-</record>
-</log>

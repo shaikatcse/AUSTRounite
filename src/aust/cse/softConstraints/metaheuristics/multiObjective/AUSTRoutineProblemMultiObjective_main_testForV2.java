@@ -19,7 +19,7 @@
 //  You should have received a copy of the GNU Lesser General Public License
 //  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-package aust.cse.routine.main;
+package aust.cse.softConstraints.metaheuristics.multiObjective;
 
 import jmetal.core.Algorithm;
 import jmetal.core.Operator;
@@ -42,6 +42,7 @@ import java.util.HashMap;
 import aust.cse.routine.problem.multiObjective.AUSTCSERoutineMultiObjectiveProblem;
 import aust.cse.routine.problem.multiObjective.AUSTCSERoutineMultiObjectiveProblemV1;
 import aust.cse.routine.problem.multiObjective.withoutDataBase.AUSTCSERoutineMultiObjectiveProblemV2;
+import aust.cse.softConstraints.problem.AUSTCSERoutineMultiObjectiveProblemV2WithSC;
 
 /**
  * This class runs a single-objective genetic algorithm (GA). The GA can be 
@@ -65,9 +66,9 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
     for(int i=0;i<1;i++) {
 
     	String resultPath=".\\results\\testV2\\run"+i;
-    problem = new AUSTCSERoutineMultiObjectiveProblemV2("Permutation");
+    problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
     
-    algorithm = new NSGAII(problem, resultPath);
+    algorithm = new NSGAIISC(problem);
     //algorithm = new gGA(problem) ;
     
     // Algorithm params
@@ -86,7 +87,7 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
   
     /* Selection Operator */
     parameters = null;
-    selection = SelectionFactory.getSelectionOperator("BinaryTournament", parameters) ;                            
+    selection = new aust.cse.softConstraints.operators.selection.BinaryTournamentSC(parameters); 
     
     /* Add the operators to the algorithm*/
     algorithm.addOperator("crossover",crossover);
