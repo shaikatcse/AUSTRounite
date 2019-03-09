@@ -1,0 +1,7 @@
+Preliminary experiments:
+   Experiment to understand how much evaluations is required? With all the hard constraints in place, 
+   I think we need at least 12,00,000 with 300 populationSize. The following things need to be noted:
+   		1. after the smart initilization, we need to save the population to compare how much gain we got after the evaluation
+   		
+	After settleing down the maximum evaluation, we can run the 
+   		

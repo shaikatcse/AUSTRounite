@@ -25,8 +25,8 @@ import jmetal.core.Algorithm;
 import jmetal.core.Operator;
 import jmetal.core.Problem;
 import jmetal.core.SolutionSet;
-import jmetal.metaheuristics.nsgaII.pNSGAII;
-import aust.cse.routine.metaheuristics.nsgaii.NSGAII;
+
+import aust.cse.routine.metaheuristics.nsgaii.pNSGAII;
 import aust.cse.routine.metaheuristics.singleObjective.geneticAlgorithm.ssGA;
 import jmetal.operators.crossover.CrossoverFactory;
 import jmetal.operators.mutation.MutationFactory;
@@ -42,6 +42,7 @@ import java.util.HashMap;
 
 
 import aust.cse.routine.problem.multiObjective.AUSTCSERoutineMultiObjectiveProblem;
+import aust.cse.routine.problem.multiObjective.withoutDataBase.AUSTCSERoutineMultiObjectiveProblemV2;
 
 /**
  * This class runs a single-objective genetic algorithm (GA). The GA can be 
@@ -65,14 +66,16 @@ public class AUSTRoutineProblemMultiObjective_pNSGAII_main {
     int threads = 4 ; // 0 - use all the available cores
     IParallelEvaluator parallelEvaluator = new MultithreadedEvaluator(threads) ;
     
-    problem = new AUSTCSERoutineMultiObjectiveProblem("Permutation");
+    String resultPath=".\\results\\testV2\\run";	
     
-    algorithm = new pNSGAII(problem, parallelEvaluator);
+    problem = new AUSTCSERoutineMultiObjectiveProblemV2("Permutation");
+    
+    algorithm = new pNSGAII(problem, resultPath, parallelEvaluator);
     //algorithm = new gGA(problem) ;
     
     // Algorithm params
-    algorithm.setInputParameter("populationSize",200);
-    algorithm.setInputParameter("maxEvaluations",80000);
+    algorithm.setInputParameter("populationSize",300);
+    algorithm.setInputParameter("maxEvaluations",300000);
     
     // Mutation and Crossover for Real codification
     parameters = new HashMap() ;
