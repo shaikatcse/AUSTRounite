@@ -141,6 +141,7 @@ public class ModellingSoftConstraints {
 		teacherNamesWhoGivenPrefererdTiming = new HashSet();
 		readTeacherPrefferedTimeSlotFromFile();
 		readTeacherAssignedCourseInfoFromFile();
+		readTeacherInfoFromFile();
 	}
 
 	public void clearAllMaps() {

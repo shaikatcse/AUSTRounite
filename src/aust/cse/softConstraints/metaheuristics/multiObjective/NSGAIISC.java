@@ -217,7 +217,7 @@ public class NSGAIISC extends Algorithm {
       }
      }
       
-      	if(isAllahardConstraintsSatisfy) {
+     	if(isAllahardConstraintsSatisfy) {
   	   double sumSoft =0.0;
       	int numOfIndv=0;
       	for(int i=0;i<populationSize;i++) {
@@ -231,7 +231,8 @@ public class NSGAIISC extends Algorithm {
       	System.out.println(evaluations/populationSize+" "+
       			(sumSoft)/(double)numOfIndv+" "+numOfIndv);
       	fileForSoftConstraint.write(evaluations/populationSize+" "+
-      			(sumSoft)/(double)numOfIndv+" "+numOfIndv);
+      			(sumSoft)/(double)numOfIndv+" "+numOfIndv+System.getProperty( "line.separator" ));
+      	
       	}
 
 

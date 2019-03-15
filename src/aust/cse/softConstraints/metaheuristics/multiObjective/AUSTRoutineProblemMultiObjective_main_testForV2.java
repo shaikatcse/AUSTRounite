@@ -73,7 +73,7 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
     
     // Algorithm params
     algorithm.setInputParameter("populationSize",300);
-    algorithm.setInputParameter("maxEvaluations",600000);
+    algorithm.setInputParameter("maxEvaluations",3000);
     
     // Mutation and Crossover for Real codification
     parameters = new HashMap() ;
