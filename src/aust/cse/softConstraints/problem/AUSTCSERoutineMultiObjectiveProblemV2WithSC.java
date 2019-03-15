@@ -458,7 +458,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2WithSC extends Problem {
 	  
 	numberOfVariables_  = 1;
     numberOfObjectives_ = 2;
-    numberOfConstraints_= 0;
+    numberOfConstraints_= 5;
     numberOfSoftConstraints_=1;
     problemName_        = "AUSTCSERoutineProblem";
     solutionType_ = new PermutationSolutionType(this) ;
@@ -560,7 +560,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2WithSC extends Problem {
 	    	courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, ((Permutation)solution.getDecisionVariables()[0]).vector_[i]);
 	    	
 	    	modellingObjectives.fillUpTheMap(slotInfo, courseInfo);
-	    	//modellingConstraints.updateAllMaps(slotInfo, courseInfo);
+	    	modellingConstraints.updateAllMaps(slotInfo, courseInfo);
 	    	modellingSoftConstraints.updateAllMaps(slotInfo, courseInfo);
 	    	
 	    

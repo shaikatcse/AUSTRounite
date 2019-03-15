@@ -21,6 +21,11 @@
 
 package aust.cse.softConstraints.metaheuristics.multiObjective;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
+import aust.cse.softConstraints.problem.AUSTCSERoutineMultiObjectiveProblemV2WithSC;
 import aust.cse.softConstraints.util.RankingSC;
 import jmetal.core.*;
 import jmetal.qualityIndicator.QualityIndicator;
@@ -40,13 +45,29 @@ import jmetal.util.comparators.CrowdingComparator;
  */
 
 public class NSGAIISC extends Algorithm {
-  /**
+  
+	File file;
+	PrintWriter fileForSoftConstraint;
+	/**
    * Constructor
    * @param problem Problem to solve
    */
   public NSGAIISC(Problem problem) {
     super (problem) ;
   } // NSGAII
+  
+  public NSGAIISC(Problem problem, String folderForGenerationData) {
+		super(problem);
+		file = new File(folderForGenerationData);
+		file.mkdirs();
+		try {
+			fileForSoftConstraint = new PrintWriter(file.getPath()+"\\trackingSoftConstraints");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	} // 
 
   /**   
    * Runs the NSGA-II algorithm.
@@ -91,15 +112,29 @@ public class NSGAIISC extends Algorithm {
 
     // Create the initial solutionSet
     Solution newSolution;
-    for (int i = 0; i < populationSize; i++) {
-      newSolution = new Solution(problem_);
-      problem_.evaluate(newSolution);
-      problem_.evaluateConstraints(newSolution);
-      problem_.evaluateSoftConstraints(newSolution);
-      evaluations++;
-      population.add(newSolution);
-    } //for       
+	for (int i = 0; i < populationSize / 2; i++) {
 
+		newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2WithSC) problem_).createVariable();
+		problem_.evaluate(newSolution);
+		problem_.evaluateConstraints(newSolution);
+		evaluations++;
+		population.add(newSolution);
+	}
+
+	for (int i = 0; i < populationSize / 2; i++) {
+		newSolution = new Solution(problem_);
+		problem_.repair(newSolution);
+		problem_.evaluate(newSolution);
+		problem_.evaluateConstraints(newSolution);
+		evaluations++;
+		population.add(newSolution);
+	} // for
+
+	Ranking r = new Ranking(population);
+	if(r.getSubfront(0).size()==0)
+		population.printFeasibleFUN(file.getPath()+"\\initP");
+	else
+		r.getSubfront(0).printFeasibleFUN(file.getPath()+"\\initP");
     // Generations 
     while (evaluations < maxEvaluations) {
 
@@ -169,22 +204,36 @@ public class NSGAIISC extends Algorithm {
           population.add(front.get(k));
         } // for
         
-        //tracking
-        //if(front.size()>=populationSize) {
-        	double sum=0.0;
-        	int numOfV=0;
-        	for(int i=0;i<populationSize;i++) {
-        		if(population.get(i).getOverallSoftConstraintViolation()<0.0) {
-        			sum+=population.get(i).getOverallSoftConstraintViolation();
-        			numOfV++;
-        		}
-        	}
-        	System.out.println("Generation: "+evaluations/populationSize+" avg cons: "+(sum)/(double)numOfV
-        			+" numberofV: "+numOfV);
-        //}
-        
+             
         remain = 0;
-      } // if                               
+      } // if         
+      
+      //tracking
+      boolean isAllahardConstraintsSatisfy=true;
+     for(int i=0; i<populationSize;i++) {
+      if(population.get(i).getOverallConstraintViolation()<0.0) {
+      	isAllahardConstraintsSatisfy=false;
+      	break;
+      }
+     }
+      
+      	if(isAllahardConstraintsSatisfy) {
+  	   double sumSoft =0.0;
+      	int numOfIndv=0;
+      	for(int i=0;i<populationSize;i++) {
+     
+      	
+      		if(population.get(i).getOverallSoftConstraintViolation()<0.0) {
+      			sumSoft+=population.get(i).getOverallSoftConstraintViolation();
+      			numOfIndv++;
+      		}
+      	}
+      	System.out.println(evaluations/populationSize+" "+
+      			(sumSoft)/(double)numOfIndv+" "+numOfIndv);
+      	fileForSoftConstraint.write(evaluations/populationSize+" "+
+      			(sumSoft)/(double)numOfIndv+" "+numOfIndv);
+      	}
+
 
       // This piece of code shows how to use the indicator object into the code
       // of NSGA-II. In particular, it finds the number of evaluations required
@@ -199,6 +248,8 @@ public class NSGAIISC extends Algorithm {
       } // if
     } // while
 
+    fileForSoftConstraint.close();
+    
     // Return as output parameter the required evaluations
     setOutputParameter("evaluations", requiredEvaluations);
 

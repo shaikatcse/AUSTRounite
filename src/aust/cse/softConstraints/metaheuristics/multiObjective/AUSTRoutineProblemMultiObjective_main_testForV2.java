@@ -65,15 +65,15 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
         
     for(int i=0;i<1;i++) {
 
-    	String resultPath=".\\results\\testV2\\run"+i;
+    	String resultPath=".\\results\\multiObjective\\run"+i;
     problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
     
-    algorithm = new NSGAIISC(problem);
+    algorithm = new NSGAIISC(problem, resultPath);
     //algorithm = new gGA(problem) ;
     
     // Algorithm params
     algorithm.setInputParameter("populationSize",300);
-    algorithm.setInputParameter("maxEvaluations",300000);
+    algorithm.setInputParameter("maxEvaluations",600000);
     
     // Mutation and Crossover for Real codification
     parameters = new HashMap() ;

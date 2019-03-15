@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 
 import org.apache.commons.collections4.keyvalue.MultiKey;
@@ -56,6 +57,11 @@ class TeacherPreferredSlot {
 }
 
 class TeacherPreferredSlotsInfo {
+	
+	final int assistantProfConsMultiplier=13;
+	final int associateProfConsMultiplier= assistantProfConsMultiplier + 16;
+	final int profConsMultiplier= assistantProfConsMultiplier + 5;
+	
 	ArrayList<TeacherPreferredSlot> teacherPreferredSlots;
 	int numberOfTimeTheCourseIsOutsidePreferredSlot;
 
@@ -93,6 +99,32 @@ class TeacherPreferredSlotsInfo {
 			}
 		}
 	}
+	
+	void isTheClassTimeWithinThePreferredTimeSlot(SlotInfo aSlot, String teacherName, HashMap<String, String> teacherInfo) {
+		String designation = teacherInfo.get(teacherName);
+		
+		Date slotEndTime = convertStringToDate(aSlot.getEndTime());
+		Date slotStartTime = convertStringToDate(aSlot.getStartTime());
+		for (int i = 0; i < teacherPreferredSlots.size(); i++) {
+			TeacherPreferredSlot aPreferredSlot = teacherPreferredSlots.get(i);
+			if (slotEndTime.before(aPreferredSlot.getStartTime()) || slotStartTime.after(aPreferredSlot.getEndTime())) {
+				if(designation.equals("Assistant professor")) {
+					this.numberOfTimeTheCourseIsOutsidePreferredSlot += assistantProfConsMultiplier;
+					break;
+				}else if(designation.equals("Associate professor")) {
+					this.numberOfTimeTheCourseIsOutsidePreferredSlot += associateProfConsMultiplier;
+					break;
+				}else if(designation.equals("Professor")) {
+					this.numberOfTimeTheCourseIsOutsidePreferredSlot += profConsMultiplier;
+					break;
+				}else {
+					this.numberOfTimeTheCourseIsOutsidePreferredSlot ++;
+					break;
+				}
+				
+			}
+		}
+	}
 
 }
 
@@ -100,6 +132,8 @@ public class ModellingSoftConstraints {
 	ArrayList<TeacherAssignedCourseInfo> teacherAssignedCourseInfo;
 	HashSet<String> teacherNamesWhoGivenPrefererdTiming;
 
+	HashMap<String, String> teacherInfo;
+	
 	MultiKeyMap<MultiKey, TeacherPreferredSlotsInfo> mapForCalculatingConstraintsOfTeacherPreferredSlots;
 
 	public ModellingSoftConstraints() {
@@ -127,12 +161,12 @@ public class ModellingSoftConstraints {
 							TeacherPreferredSlot tpSlot = new TeacherPreferredSlot("undefined", "undefined");
 							TeacherPreferredSlotsInfo tpSlotInfo = new TeacherPreferredSlotsInfo();
 							tpSlotInfo.teacherPreferredSlots.add(tpSlot);
-							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo);
+							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo, name, teacherInfo);
 							mapForCalculatingConstraintsOfTeacherPreferredSlots.put(key, tpSlotInfo);
 						} else {
 							TeacherPreferredSlotsInfo tpSlotInfo = mapForCalculatingConstraintsOfTeacherPreferredSlots
 									.get(key);
-							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo);
+							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo, name, teacherInfo);
 						}
 					}
 				}
@@ -214,6 +248,27 @@ public class ModellingSoftConstraints {
 			e.printStackTrace();
 		}
 	}
+	
+	void readTeacherInfoFromFile() {
+		BufferedReader br = null;
+		String line = "";
+		String csvFile = "TeacherInfo.csv";
+		String cvsSplitBy = ",";
+
+		teacherInfo = new HashMap<String, String>();
+		try {
+			br = new BufferedReader(new FileReader(csvFile));
+			line = br.readLine();
+			while ((line = br.readLine()) != null) {
+
+				// use comma as separator
+				String[] info = line.split(cvsSplitBy);
+				teacherInfo.put(info[0], info[1]);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}	
 
 	ArrayList<String> getTeacherNameAssignedForACourse(CourseInfo courseInfo) {
 		ArrayList<String> teacherNames = new ArrayList<String>();

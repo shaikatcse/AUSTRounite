@@ -1,7 +1,14 @@
 Preliminary experiments:
    Experiment to understand how much evaluations is required? With all the hard constraints in place, 
    I think we need at least 12,00,000 with 300 populationSize. The following things need to be noted:
-   		1. after the smart initilization, we need to save the population to compare how much gain we got after the evaluation
-   		
-	After settleing down the maximum evaluation, we can run the 
-   		
+   		1. After the smart initilization, we need to save the population to compare how much gain we got after the evaluation (evaluating the optimization is requied)
+  		2. After hard constraints are handled, we need to track soft constraints for each generation (our approach for soft constraint works?)
+  		3. Another run is required without smart initialization to show that it is very difficult to get feasible solutions. Recored number of infeasible solution in each generation.
+		
+		
+	Run configuration:
+		1. run the soft constraint version:
+			1.1 Save the smart initial population
+			1.2 Track soft constrains (averageTotalSofConstraints violation for each feasible individual, number of individual that violetes soft constriants ) for each generation after hard constraints are handled
+		
+		2. Run normal version without smart initialization  
