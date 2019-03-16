@@ -164,6 +164,7 @@ public class DataBaseToArray {
 	  void printInfo(){
 		  modellingObjectives.PrintAllInfo();
 		  System.out.println(modellingObjectives.calculateTotalStudentsTime());
+		  System.out.println(modellingObjectives.calculateTotalTeachertime());
 	  }
 	  
 	  

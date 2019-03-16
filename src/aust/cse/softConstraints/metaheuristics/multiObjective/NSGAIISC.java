@@ -117,6 +117,7 @@ public class NSGAIISC extends Algorithm {
 		newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2WithSC) problem_).createVariable();
 		problem_.evaluate(newSolution);
 		problem_.evaluateConstraints(newSolution);
+		problem_.evaluateSoftConstraints(newSolution);
 		evaluations++;
 		population.add(newSolution);
 	}
@@ -126,6 +127,7 @@ public class NSGAIISC extends Algorithm {
 		problem_.repair(newSolution);
 		problem_.evaluate(newSolution);
 		problem_.evaluateConstraints(newSolution);
+		problem_.evaluateSoftConstraints(newSolution);
 		evaluations++;
 		population.add(newSolution);
 	} // for

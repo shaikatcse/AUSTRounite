@@ -58,9 +58,9 @@ class TeacherPreferredSlot {
 
 class TeacherPreferredSlotsInfo {
 	
-	final int assistantProfConsMultiplier=13;
-	final int associateProfConsMultiplier= assistantProfConsMultiplier + 16;
-	final int profConsMultiplier= assistantProfConsMultiplier + 5;
+	final int assistantProfConsMultiplier = 13;
+	final int associateProfConsMultiplier = assistantProfConsMultiplier + 16;
+	final int profConsMultiplier = associateProfConsMultiplier + 5;
 	
 	ArrayList<TeacherPreferredSlot> teacherPreferredSlots;
 	int numberOfTimeTheCourseIsOutsidePreferredSlot;

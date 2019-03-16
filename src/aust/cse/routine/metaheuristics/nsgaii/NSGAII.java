@@ -22,8 +22,10 @@
 package aust.cse.routine.metaheuristics.nsgaii;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,16 +59,23 @@ public class NSGAII extends Algorithm {
 	 */
 
 	File file;
+	PrintWriter fileForSoftConstraint;
 
 	public NSGAII(Problem problem, String folderForGenerationData) {
 		super(problem);
 		file = new File(folderForGenerationData);
 		file.mkdirs();
+		try {
+			fileForSoftConstraint = new PrintWriter(file.getPath() + "\\trackingSoftConstraints");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	} // NSGAII
-	
+
 	public NSGAII(Problem problem) {
 		super(problem);
-	
+
 	} // NSGAII
 
 	void writeGenerationalDataToFile(int generationNo, SolutionSet s) {
@@ -75,9 +84,9 @@ public class NSGAII extends Algorithm {
 			f = new FileWriter(file.getPath() + "\\" + generationNo + "");
 
 			for (int i = 0; i < s.size(); i++) {
-				if(s.get(i).getOverallConstraintViolation()==0.0) {
-				f.write(s.get(i).getObjective(0) + " " + s.get(i).getObjective(1)
-						+ System.getProperty("line.separator"));
+				if (s.get(i).getOverallConstraintViolation() == 0.0) {
+					f.write(s.get(i).getObjective(0) + " " + s.get(i).getObjective(1)
+							+ System.getProperty("line.separator"));
 				}
 			}
 			f.close();
@@ -85,7 +94,7 @@ public class NSGAII extends Algorithm {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+
 	}
 
 	int howManyDuplicate(SolutionSet population) {
@@ -174,49 +183,30 @@ public class NSGAII extends Algorithm {
 		// Create the initial solutionSet
 		Solution newSolution;
 
-		for (int i = 0; i < populationSize / 2; i++) {
+		/*
+		 * for (int i = 0; i < populationSize / 2; i++) {
+		 * 
+		 * newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2)
+		 * problem_).createVariable(); problem_.evaluate(newSolution);
+		 * problem_.evaluateConstraints(newSolution); evaluations++;
+		 * population.add(newSolution);
+		 * System.out.println(newSolution.getOverallConstraintViolation()); }
+		 */
 
-			newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2) problem_).createVariable();
-			problem_.evaluate(newSolution);
-			problem_.evaluateConstraints(newSolution);
-			evaluations++;
-			population.add(newSolution);
-			System.out.println(newSolution.getOverallConstraintViolation());
-		}
-
-		for (int i = 0; i < populationSize / 2; i++) {
+		for (int i = 0; i < populationSize; i++) {
 			newSolution = new Solution(problem_);
 			problem_.repair(newSolution);
 			problem_.evaluate(newSolution);
 			problem_.evaluateConstraints(newSolution);
+			problem_.evaluateSoftConstraints(newSolution);
 			evaluations++;
 			population.add(newSolution);
 		} // for
 
-		
-		//write to file
-		Ranking r = new Ranking(population);
-		
-		//writeGenerationalDataToFile(evaluations/populationSize, r.getSubfront(0));
-		
-		{
-			Calendar cal = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-			System.out.println("TIme:" + sdf.format(cal.getTime()) + "-> " + evaluations);
-			for (int i = 0; i < population.size(); i++) {
-				System.out.print(population.get(i).getOverallConstraintViolation() + " ");
-				System.out.println(
-						"Obj1: " + population.get(i).getObjective(0) + " Obj2: " + population.get(i).getObjective(1));
-			}
-			System.out.println();
-		}
-
-		System.out.println("Duplicate: " + howManyDuplicate(population));
-
 		// Generations
 		while (evaluations < maxEvaluations) {
 
-			if (evaluations % 21000 == 0) {
+			if (evaluations % 3000 == 0) {
 				for (int i = 0; i < population.size(); i++) {
 					System.out.print(population.get(i).getOverallConstraintViolation() + " ");
 					System.out.println("Obj1: " + population.get(i).getObjective(0) + "Obj2: "
@@ -232,37 +222,46 @@ public class NSGAII extends Algorithm {
 			for (int i = 0; i < (populationSize / 2); i++) {
 				if (evaluations < maxEvaluations) {
 
-					do {
-						// obtain parents
-						parents[0] = (Solution) selectionOperator.execute(population);
-						parents[1] = (Solution) selectionOperator.execute(population);
-						offSpring = (Solution[]) crossoverOperator.execute(parents);
-						mutationOperator.execute(offSpring[0]);
-						mutationOperator.execute(offSpring[1]);
-					} while (isThereADuplicationIndv(population.union(offspringPopulation), offSpring[0])
-							|| isThereADuplicationIndv(population.union(offspringPopulation), offSpring[1]));
+					/*
+					 * do { // obtain parents parents[0] = (Solution)
+					 * selectionOperator.execute(population); parents[1] = (Solution)
+					 * selectionOperator.execute(population); offSpring = (Solution[])
+					 * crossoverOperator.execute(parents); mutationOperator.execute(offSpring[0]);
+					 * mutationOperator.execute(offSpring[1]); } while
+					 * (isThereADuplicationIndv(population.union(offspringPopulation), offSpring[0])
+					 * || isThereADuplicationIndv(population.union(offspringPopulation),
+					 * offSpring[1]));
+					 */
+					parents[0] = (Solution) selectionOperator.execute(population);
+					parents[1] = (Solution) selectionOperator.execute(population);
+					offSpring = (Solution[]) crossoverOperator.execute(parents);
+					mutationOperator.execute(offSpring[0]);
+					mutationOperator.execute(offSpring[1]);
 
 					problem_.repair(offSpring[0]);
 					problem_.repair(offSpring[1]);
 					problem_.evaluate(offSpring[0]);
 					problem_.evaluateConstraints(offSpring[0]);
+					problem_.evaluateSoftConstraints(offSpring[0]);
 					problem_.evaluate(offSpring[1]);
 					problem_.evaluateConstraints(offSpring[1]);
+					problem_.evaluateSoftConstraints(offSpring[1]);
 					offspringPopulation.add(offSpring[0]);
 					offspringPopulation.add(offSpring[1]);
 					evaluations += 2;
 				} // if
 			} // for
 
-//			System.out.println(
-	//				"Duplicate after offspring creation: " + howManyDuplicate(population.union(offspringPopulation)));
+			// System.out.println(
+			// "Duplicate after offspring creation: " +
+			// howManyDuplicate(population.union(offspringPopulation)));
 
 			// Create the solutionSet union of solutionSet and offSpring
 			union = ((SolutionSet) population).union(offspringPopulation);
 
 			// Ranking the union
 			Ranking ranking = new Ranking(union);
-		
+
 			int remain = populationSize;
 			int index = 0;
 			SolutionSet front = null;
@@ -300,9 +299,31 @@ public class NSGAII extends Algorithm {
 				remain = 0;
 			} // if
 
-			/*Ranking r2=new Ranking(population);
-			writeGenerationalDataToFile(evaluations/populationSize, r2.getSubfront(0));
-			System.out.println("Duplicate after ranking: " + howManyDuplicate(population));*/
+			// tracking
+			boolean isAllahardConstraintsSatisfy = true;
+			for (int i = 0; i < populationSize; i++) {
+				if (population.get(i).getOverallConstraintViolation() < 0.0) {
+					isAllahardConstraintsSatisfy = false;
+					break;
+				}
+			}
+
+			if (isAllahardConstraintsSatisfy) {
+				double sumSoft = 0.0;
+				int numOfIndv = 0;
+				for (int i = 0; i < populationSize; i++) {
+
+					if (population.get(i).getOverallSoftConstraintViolation() < 0.0) {
+						sumSoft += population.get(i).getOverallSoftConstraintViolation();
+						numOfIndv++;
+					}
+				}
+				System.out
+						.println(evaluations / populationSize + " " + (sumSoft) / (double) numOfIndv + " " + numOfIndv);
+				fileForSoftConstraint.write(evaluations / populationSize + " " + (sumSoft) / (double) numOfIndv + " "
+						+ numOfIndv + System.getProperty("line.separator"));
+
+			}
 
 			// This piece of code shows how to use the indicator object into the code
 			// of NSGA-II. In particular, it finds the number of evaluations required
