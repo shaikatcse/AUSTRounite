@@ -421,7 +421,9 @@ public class FindSoftConsViolationFromFile {
 
 	public static void main(String agrs[]) {
 		// new DatabaseFromFile(".\\results\\VAR_Elitist_0");
-		new FindSoftConsViolationFromFile(".\\results\\multiObjective\\run0\\FIS_VAR_NSGAII");
+		//new FindSoftConsViolationFromFile(".\\results\\multiObjective\\NoSoftConstBinaryTournament\\run0\\FIS_VAR_NSGAII");
+		new FindSoftConsViolationFromFile(".\\results\\multiObjective\\SmartInit\\run0\\FIS_VAR_NSGAII");
+		
 											 
 	}
 
