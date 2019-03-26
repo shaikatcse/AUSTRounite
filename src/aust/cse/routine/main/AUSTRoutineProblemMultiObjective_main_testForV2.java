@@ -42,6 +42,9 @@ import java.util.HashMap;
 import aust.cse.routine.problem.multiObjective.AUSTCSERoutineMultiObjectiveProblem;
 import aust.cse.routine.problem.multiObjective.AUSTCSERoutineMultiObjectiveProblemV1;
 import aust.cse.routine.problem.multiObjective.withoutDataBase.AUSTCSERoutineMultiObjectiveProblemV2;
+import aust.cse.softConstraints.metaheuristics.multiObjective.NSGAIISC;
+import aust.cse.softConstraints.operators.selection.BinaryTournamentSC;
+import aust.cse.softConstraints.problem.AUSTCSERoutineMultiObjectiveProblemV2WithSC;
 
 /**
  * This class runs a single-objective genetic algorithm (GA). The GA can be 
@@ -65,9 +68,9 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
     for(int i=0;i<1;i++) {
 
     	String resultPath=".\\results\\testV2\\run"+i;
-    problem = new AUSTCSERoutineMultiObjectiveProblemV2("Permutation");
+    problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
     
-    algorithm = new NSGAII(problem, resultPath);
+    algorithm = new NSGAIISC(problem, resultPath);
     //algorithm = new gGA(problem) ;
     
     // Algorithm params
@@ -86,7 +89,8 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
   
     /* Selection Operator */
     parameters = null;
-    selection = SelectionFactory.getSelectionOperator("BinaryTournament", parameters) ;                            
+    selection = new BinaryTournamentSC(parameters);
+    //selection = SelectionFactory.getSelectionOperator("BinaryTournament", parameters) ;                            
     
     /* Add the operators to the algorithm*/
     algorithm.addOperator("crossover",crossover);
