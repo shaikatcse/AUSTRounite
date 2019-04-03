@@ -112,16 +112,23 @@ public class NSGAIISC extends Algorithm {
 
     // Create the initial solutionSet
     Solution newSolution;
-	for (int i = 0; i < populationSize / 2; i++) {
+	
+    //for tracking////
+   // SolutionSet tempPopulation = new SolutionSet(populationSize/2);
+  	
+  //for tracking////
+    //for(int j=0;j<10;j++) {
+    
+    for (int i = 0; i < populationSize / 2; i++) {
 
 		newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2WithSC) problem_).createVariable();
 		problem_.evaluate(newSolution);
 		problem_.evaluateConstraints(newSolution);
 		problem_.evaluateSoftConstraints(newSolution);
 		evaluations++;
-		population.add(newSolution);
-	}
-
+		
+    }
+    
 	for (int i = 0; i < populationSize / 2; i++) {
 		newSolution = new Solution(problem_);
 		problem_.repair(newSolution);
@@ -131,6 +138,8 @@ public class NSGAIISC extends Algorithm {
 		evaluations++;
 		population.add(newSolution);
 	} // for
+	
+
 
 	Ranking r = new Ranking(population);
 	if(r.getSubfront(0).size()==0)
@@ -163,6 +172,10 @@ public class NSGAIISC extends Algorithm {
         } // if                            
       } // for
 
+      
+      
+      
+      
       // Create the solutionSet union of solutionSet and offSpring
       union = ((SolutionSet) population).union(offspringPopulation);
 
