@@ -45,6 +45,7 @@ import aust.cse.routine.problem.multiObjective.withoutDataBase.AUSTCSERoutineMul
 import aust.cse.softConstraints.metaheuristics.multiObjective.NSGAIISC;
 import aust.cse.softConstraints.operators.selection.BinaryTournamentSC;
 import aust.cse.softConstraints.problem.AUSTCSERoutineMultiObjectiveProblemV2WithSC;
+import aust.cse.softConstraints.util.FindSoftConsViolationFromFile;
 
 /**
  * This class runs a single-objective genetic algorithm (GA). The GA can be 
@@ -107,11 +108,15 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
     
    /* Log messages */
     System.out.println("Objectives values have been writen to file FUN");
-    population.printObjectivesToFile(resultPath+"\\FUN_NSGAII");
     System.out.println("Variables values have been writen to file VAR");
-    population.printVariablesToFile(resultPath+"\\VAR_NSGAII");          
+    
     population.printFeasibleVAR(resultPath+"\\FIS_VAR_NSGAII");
     population.printFeasibleFUN(resultPath+"\\FIS_FUN_NSGAII");
+    
+    population.printFeasibleFUNWithSC(resultPath+"\\FIS_FUN_NSGAII_SC");
+    new FindSoftConsViolationFromFile(
+			resultPath,"\\FIS_VAR_NSGAII");
+
     
    /* System.out.println("Objectives values have been writen to file FUN");
     population.printObjectivesToFile("FUN_NSGAII");

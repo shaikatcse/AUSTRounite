@@ -1,12 +1,14 @@
 package aust.cse.softConstraints.util;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,7 +27,9 @@ import org.apache.commons.collections4.map.MultiKeyMap;
 import aust.cse.routine.util.CourseInfo;
 import aust.cse.routine.util.SlotInfo;
 import aust.cse.routine.util.TeacherAssignedCourseInfo;
+import jmetal.core.Solution;
 import jmetal.encodings.variable.Permutation;
+import jmetal.util.Configuration;
 
 class TeacherPreferredSlot {
 	Date startTime, endTime;
@@ -166,10 +170,10 @@ public class FindSoftConsViolationFromFile {
 
 	}
 
-	FindSoftConsViolationFromFile(String varFileName) {
-		
+	public FindSoftConsViolationFromFile(String path, String varFileName) {
+
 		numberOfviolationForDesignation = new HashMap();
-		
+
 		teacherNamesWhoGivenPrefererdTiming = new HashSet();
 		mapForCalculatingConstraintsOfTeacherPreferredSlots = new MultiKeyMap();
 
@@ -178,38 +182,64 @@ public class FindSoftConsViolationFromFile {
 
 		// read slotInfo from slotInfo.csv file
 		readSlotInfoFromFile();
-		
+
 		readTeacherAssignedCourseInfoFromFile();
-		
+
 		readTeacherPrefferedTimeSlotFromFile();
-		
+
 		readTeacherInfoFromFile();
 
-		List<int[]> variableRow = readVariablesFromFile(varFileName);
-		 SlotInfo slotInfo;
-		  CourseInfo courseInfo;
-		  
-		  initializeNumberOfViolationForDesignation();
-		  
-		for(int i=0;i<variableRow.size();i++) {
-			int variables[] = variableRow.get(i);
-			for(int j=0;j<variables.length;j++) {
-			slotInfo = SlotInfo.searchSlotInfoArryList(this.slotInfo, j+"");
-			courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, variables[j]);
-			updateAllMaps(slotInfo, courseInfo);
-			
+		List<int[]> variableRow = readVariablesFromFile(path + varFileName);
+		SlotInfo slotInfo;
+		CourseInfo courseInfo;
+
+		initializeNumberOfViolationForDesignation();
+
+		try {
+			/* Open the file */
+			FileOutputStream fos = new FileOutputStream(path+"\\SoftConstViolationForDesignation");
+			OutputStreamWriter osw = new OutputStreamWriter(fos);
+			BufferedWriter bw = new BufferedWriter(osw);
+
+			for (int i = 0; i < variableRow.size(); i++) {
+				int variables[] = variableRow.get(i);
+				for (int j = 0; j < variables.length; j++) {
+					slotInfo = SlotInfo.searchSlotInfoArryList(this.slotInfo, j + "");
+					courseInfo = CourseInfo.srachCourseInfoArryList(this.courseInfo, variables[j]);
+					updateAllMaps(slotInfo, courseInfo);
+
+				}
+
+				printNumberOfViolation();
+				writeViolationForDesignation( bw);
+				initializeNumberOfViolationForDesignation();
+			}
+			bw.close();
+		} catch (IOException e) {
+			Configuration.logger_.severe("Error acceding to the file");
+			e.printStackTrace();
 		}
-			printNumberOfViolation();
-			initializeNumberOfViolationForDesignation();
-			
-			
-		}
+
 	}
+
 	
+
+	public void writeViolationForDesignation( BufferedWriter bw) throws IOException {
+
+		String[] designations = { "Professor", "Associate professor", "Assistant professor", "Lecturer" };
+
+		for (String designation : designations) {
+			bw.write(designation + ": "+numberOfviolationForDesignation.get(designation)+", ");
+		}
+		bw.newLine();
+
+		/* Close the file */
+	} // printObjectivesToFile
+
 	void printNumberOfViolation() {
-		String []designations = {"Professor", "Associate professor", "Assistant professor", "Lecturer"};
-		for(String designation:designations) {
-			System.out.println(designation+": "+ numberOfviolationForDesignation.get(designation));
+		String[] designations = { "Professor", "Associate professor", "Assistant professor", "Lecturer" };
+		for (String designation : designations) {
+			System.out.println(designation + ": " + numberOfviolationForDesignation.get(designation));
 		}
 	}
 
@@ -251,12 +281,14 @@ public class FindSoftConsViolationFromFile {
 							TeacherPreferredSlot tpSlot = new TeacherPreferredSlot("undefined", "undefined");
 							TeacherPreferredSlotsInfo tpSlotInfo = new TeacherPreferredSlotsInfo();
 							tpSlotInfo.teacherPreferredSlots.add(tpSlot);
-							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo, name, teacherInfo, numberOfviolationForDesignation);
+							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo, name, teacherInfo,
+									numberOfviolationForDesignation);
 							mapForCalculatingConstraintsOfTeacherPreferredSlots.put(key, tpSlotInfo);
 						} else {
 							TeacherPreferredSlotsInfo tpSlotInfo = mapForCalculatingConstraintsOfTeacherPreferredSlots
 									.get(key);
-							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo, name, teacherInfo, numberOfviolationForDesignation);
+							tpSlotInfo.isTheClassTimeWithinThePreferredTimeSlot(slotInfo, name, teacherInfo,
+									numberOfviolationForDesignation);
 						}
 					}
 				}
@@ -421,10 +453,11 @@ public class FindSoftConsViolationFromFile {
 
 	public static void main(String agrs[]) {
 		// new DatabaseFromFile(".\\results\\VAR_Elitist_0");
-		//new FindSoftConsViolationFromFile(".\\results\\multiObjective\\NoSoftConstBinaryTournament\\run0\\FIS_VAR_NSGAII");
-		new FindSoftConsViolationFromFile(".\\results\\multiObjective\\SmartInit\\run0\\FIS_VAR_NSGAII");
-		
-											 
+		// new
+		// FindSoftConsViolationFromFile(".\\results\\multiObjective\\NoSoftConstBinaryTournament\\run0\\FIS_VAR_NSGAII");
+		new FindSoftConsViolationFromFile(
+				".\\results\\multiObjective\\SmartInitWithSCBinaryTournament\\run0","\\FIS_VAR_NSGAII");
+
 	}
 
 }

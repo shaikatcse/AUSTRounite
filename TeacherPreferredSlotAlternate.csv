@@ -1,0 +1,186 @@
+TeacherName,Day,startTime,endTime
+Dr. Md Shahriar Mahbub,Saturday,8:00:00,13:00:00
+Dr. Md Shahriar Mahbub,Sunday,10:30:00,13:00:00
+Dr. Md Shahriar Mahbub,Monday,8:00:00,13:00:00
+Dr. Md Shahriar Mahbub,Tuesday,8:00:00,13:00:00
+Dr. Md Shahriar Mahbub,Wednesday,8:00:00,13:00:00
+Dr. S. M. Abdullah Al-Mamun,Saturday,8:00:00,13:00:00
+Dr. S. M. Abdullah Al-Mamun,Sunday,8:00:00,13:00:00
+Dr. S. M. Abdullah Al-Mamun,Tuesday,8:00:00,13:00:00
+Dr. S. M. Abdullah Al-Mamun,Wednesday,8:00:00,13:00:00
+Dr. S. M. Abdullah Al-Mamun,Thursday,8:00:00,13:00:00
+Dr. Kazi A. Kalpoma,Saturday,8:00:00,15:30:00
+Dr. Kazi A. Kalpoma,Sunday,8:00:00,15:30:00
+Dr. Kazi A. Kalpoma,Monday,10:30:00,13:00:00
+Dr. Kazi A. Kalpoma,Tuesday,8:00:00,10:30:00
+Dr. Kazi A. Kalpoma,Wednesday,10:30:00,13:00:00
+Dr. Kazi A. Kalpoma,Thursday,8:00:00,15:30:00
+Mr. Md. Khairul Hasan,Sunday,13:00:00,15:30:00
+Mr. Md. Khairul Hasan,Monday,8:00:00,15:30:00
+Mr. Md. Khairul Hasan,Tuesday,8:00:00,13:00:00
+Mr. Md. Khairul Hasan,Wednesday,8:00:00,13:00:00
+Mr. Md. Khairul Hasan,Thursday,8:00:00,15:30:00
+Dr. Md. Shafiul Alam,Sunday,8:00:00,15:30:00
+Dr. Md. Shafiul Alam,Monday,8:00:00,13:00:00
+Dr. Md. Shafiul Alam,Tuesday,10:30:00,15:30:00
+Dr. Md. Shafiul Alam,Wednesday,8:00:00,15:30:00
+Dr. Md. Shafiul Alam,Thursday,8:00:00,13:00:00
+Mr. Mohammad Moinul Hoque,Saturday,8:00:00,13:00:00
+Mr. Mohammad Moinul Hoque,Sunday,8:00:00,13:00:00
+Mr. Mohammad Moinul Hoque,Monday,13:00:00,15:30:00
+Mr. Mohammad Moinul Hoque,Tuesday,10:30:00,15:30:00
+Mr. Mohammad Moinul Hoque,Wednesday,8:00:00,13:00:00
+Mr. Mohammad Moinul Hoque,Thursday,10:30:00,15:30:00
+Mr. Faisal Muhammad Shah,Saturday,8:00:00,15:30:00
+Mr. Faisal Muhammad Shah,Sunday,13:00:00,15:30:00
+Mr. Faisal Muhammad Shah,Monday,8:00:00,15:30:00
+Mr. Faisal Muhammad Shah,Tuesday,8:00:00,10:30:00
+Mr. Faisal Muhammad Shah,Tuesday,13:00:00,15:30:00
+Mr. Faisal Muhammad Shah,Wednesday,8:00:00,15:30:00
+Ms. Qamrun Nahar Eity,Saturday,8:00:00,15:30:00
+Ms. Qamrun Nahar Eity,Monday,10:30:00,15:30:00
+Ms. Qamrun Nahar Eity,Tuesday,8:00:00,15:30:00
+Ms. Qamrun Nahar Eity,Wednesday,8:00:00,15:30:00
+Ms. Qamrun Nahar Eity,Thursday,8:00:00,10:30:00
+Mr. Tanvir Ahmed,Saturday,8:00:00,13:00:00
+Mr. Tanvir Ahmed,Sunday,8:00:00,15:30:00
+Mr. Tanvir Ahmed,Monday,13:00:00,15:30:00
+Mr. Tanvir Ahmed,Tuesday,8:00:00,15:30:00
+Mr. Tanvir Ahmed,Wednesday,10:30:00,15:30:00
+Mr. Tanvir Ahmed,Thursday,8:00:00,15:30:00
+Mr. Md. Wasi Ul Kabir,Saturday,8:00:00,10:30:00
+Mr. Md. Wasi Ul Kabir,Saturday,13:00:00,15:30:00
+Mr. Md. Wasi Ul Kabir,Sunday,8:00:00,15:30:00
+Mr. Md. Wasi Ul Kabir,Monday,10:30:00,13:00:00
+Mr. Md. Wasi Ul Kabir,Wednesday,8:00:00,15:30:00
+Mr. Md. Wasi Ul Kabir,Thursday,8:00:00,13:00:00
+Mr. Emam Hossain,Saturday,8:00:00,15:30:00
+Mr. Emam Hossain,Sunday,8:00:00,15:30:00
+Mr. Emam Hossain,Monday,8:00:00,10:30:00
+Mr. Emam Hossain,Tuesday,10:30:00,15:30:00
+Mr. Emam Hossain,Wednesday,8:00:00,15:30:00
+Ms. Syeda Shabnam Hasan,Saturday,8:00:00,15:30:00
+Ms. Syeda Shabnam Hasan,Sunday,8:00:00,15:30:00
+Ms. Syeda Shabnam Hasan,Wednesday,8:00:00,15:30:00
+Ms. Syeda Shabnam Hasan,Thursday,8:00:00,15:30:00
+Mr. Nazmus Sakib,Saturday,10:30:00,15:30:00
+Mr. Nazmus Sakib,Sunday,8:00:00,13:00:00
+Mr. Nazmus Sakib,Monday,10:30:00,15:30:00
+Mr. Nazmus Sakib,Tuesday,8:00:00,10:30:00
+Mr. Nazmus Sakib,Tuesday,13:00:00,15:30:00
+Mr. Nazmus Sakib,Wednesday,8:00:00,15:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Saturday,13:00:00,15:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Sunday,8:00:00,10:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Monday,8:00:00,10:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Monday,13:00:00,15:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Tuesday,8:00:00,15:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Wednesday,10:30:00,15:30:00
+Mr. Md. Hosne-Al-Walid Shaiket,Thursday,10:30:00,15:30:00
+Ms. Shanjida Khatun,Saturday,10:30:00,15:30:00
+Ms. Shanjida Khatun,Sunday,10:30:00,15:30:00
+Ms. Shanjida Khatun,Monday,8:00:00,15:30:00
+Ms. Shanjida Khatun,Wednesday,8:00:00,10:30:00
+Ms. Shanjida Khatun,Wednesday,13:00:00,15:30:00
+Ms. Shanjida Khatun,Thursday,13:00:00,15:30:00
+Ms. Raqeebir Rab,Sunday,8:00:00,10:30:00
+Ms. Raqeebir Rab,Sunday,13:00:00,15:30:00
+Ms. Raqeebir Rab,Monday,13:00:00,15:30:00
+Ms. Raqeebir Rab,Tuesday,8:00:00,15:30:00
+Ms. Raqeebir Rab,Wednesday,8:00:00,10:30:00
+Ms. Raqeebir Rab,Wednesday,13:00:00,15:30:00
+Ms. Raqeebir Rab,Thursday,13:00:00,15:30:00
+Mr. Mohammad Imrul Jubair,Saturday,8:00:00,15:30:00
+Mr. Mohammad Imrul Jubair,Sunday,10:30:00,15:30:00
+Mr. Mohammad Imrul Jubair,Monday,10:30:00,15:30:00
+Mr. Mohammad Imrul Jubair,Wednesday,10:30:00,15:30:00
+Mr. Mohammad Imrul Jubair,Thursday,10:30:00,13:00:00
+Ms. Afsana Ahmed Munia,Saturday,8:00:00,13:00:00
+Ms. Afsana Ahmed Munia,Monday,13:00:00,15:30:00
+Ms. Afsana Ahmed Munia,Tuesday,10:30:00,13:00:00
+Ms. Afsana Ahmed Munia,Wednesday,8:00:00,10:30:00
+Ms. Afsana Ahmed Munia,Thursday,13:00:00,15:30:00
+Ms. Zarrin Tasnim Sworna,Saturday,10:30:00,15:30:00
+Ms. Zarrin Tasnim Sworna,Sunday,8:00:00,15:30:00
+Ms. Zarrin Tasnim Sworna,Tuesday,8:00:00,10:30:00
+Ms. Zarrin Tasnim Sworna,Wednesday,8:00:00,15:30:00
+Ms. Zarrin Tasnim Sworna,Thursday,8:00:00,10:30:00
+Ms. Zarrin Tasnim Sworna,Thursday,13:00:00,15:30:00
+Dr. Nusrat Sharmin,Saturday,8:00:00,13:00:00
+Dr. Nusrat Sharmin,Sunday,8:00:00,13:00:00
+Dr. Nusrat Sharmin,Monday,8:00:00,13:00:00
+Dr. Nusrat Sharmin,Tuesday,10:30:00,13:00:00
+Dr. Nusrat Sharmin,Wednesday,10:30:00,13:00:00
+Dr. Nusrat Sharmin,Thursday,8:00:00,15:30:00
+Mr. Mir Tafseer Nayeem,Saturday,8:00:00,13:00:00
+Mr. Mir Tafseer Nayeem,Sunday,8:00:00,13:00:00
+Mr. Mir Tafseer Nayeem,Monday,8:00:00,13:00:00
+Mr. Mir Tafseer Nayeem,Tuesday,8:00:00,13:00:00
+Mr. Mir Tafseer Nayeem,Thursday,8:00:00,15:30:00
+Mr. D. M. Anisuzzaman,Saturday,8:00:00,15:30:00
+Mr. D. M. Anisuzzaman,Sunday,8:00:00,15:30:00
+Mr. D. M. Anisuzzaman,Monday,13:00:00,15:30:00
+Mr. D. M. Anisuzzaman,Tuesday,8:00:00,15:30:00
+Mr. D. M. Anisuzzaman,Thursday,8:00:00,10:30:00
+Mr. Tanveer Ahmed Belal,Saturday,10:30:00,15:30:00
+Mr. Tanveer Ahmed Belal,Sunday,8:00:00,15:30:00
+Mr. Tanveer Ahmed Belal,Tuesday,10:30:00,15:30:00
+Mr. Tanveer Ahmed Belal,Wednesday,10:30:00,15:30:00
+Mr. Tanveer Ahmed Belal,Thursday,10:30:00,13:00:00
+Mr. Sujan Sarker,Saturday,8:00:00,10:30:00
+Mr. Sujan Sarker,Sunday,13:00:00,15:30:00
+Mr. Sujan Sarker,Monday,8:00:00,15:30:00
+Mr. Sujan Sarker,Wednesday,8:00:00,15:30:00
+Mr. Sujan Sarker,Thursday,8:00:00,15:30:00
+Ms. Tahsin Aziz,Saturday,8:00:00,10:30:00
+Ms. Tahsin Aziz,Saturday,13:00:00,15:30:00
+Ms. Tahsin Aziz,Sunday,10:30:00,15:30:00
+Ms. Tahsin Aziz,Monday,8:00:00,13:00:00
+Ms. Tahsin Aziz,Wednesday,13:00:00,15:30:00
+Ms. Tahsin Aziz,Thursday,8:00:00,15:30:00
+Mr. Aminur Rahman,Saturday,8:00:00,15:30:00
+Mr. Aminur Rahman,Sunday,8:00:00,10:30:00
+Mr. Aminur Rahman,Sunday,13:00:00,15:30:00
+Mr. Aminur Rahman,Tuesday,10:30:00,13:00:00
+Mr. Aminur Rahman,Wednesday,8:00:00,10:30:00
+Mr. Aminur Rahman,Wednesday,13:00:00,15:30:00
+Mr. Aminur Rahman,Thursday,10:30:00,13:00:00
+Mr. Shoeb Mohammad Shahriar,Saturday,8:00:00,13:00:00
+Mr. Shoeb Mohammad Shahriar,Sunday,13:00:00,15:30:00
+Mr. Shoeb Mohammad Shahriar,Monday,8:00:00,15:30:00
+Mr. Shoeb Mohammad Shahriar,Tuesday,10:30:00,15:30:00
+Mr. Shoeb Mohammad Shahriar,Wednesday,8:00:00,10:30:00
+Mr. Shoeb Mohammad Shahriar,Thursday,8:00:00,13:00:00
+Mr. Md. Taksir Hasan Majumder,Sunday,8:00:00,13:00:00
+Mr. Md. Taksir Hasan Majumder,Monday,10:30:00,15:30:00
+Mr. Md. Taksir Hasan Majumder,Tuesday,8:00:00,15:30:00
+Mr. Md. Taksir Hasan Majumder,Wednesday,13:00:00,15:30:00
+Mr. Md. Taksir Hasan Majumder,Thursday,8:00:00,13:00:00
+Mr. Sk. Murad Hassan Anik,Saturday,10:30:00,15:30:00
+Mr. Sk. Murad Hassan Anik,Sunday,8:00:00,10:30:00
+Mr. Sk. Murad Hassan Anik,Sunday,13:00:00,15:30:00
+Mr. Sk. Murad Hassan Anik,Tuesday,8:00:00,13:00:00
+Mr. Sk. Murad Hassan Anik,Wednesday,8:00:00,15:30:00
+Mr. Sk. Murad Hassan Anik,Thursday,13:00:00,15:30:00
+Ms. Anika Sayara,Saturday,8:00:00,10:30:00
+Ms. Anika Sayara,Saturday,13:00:00,15:30:00
+Ms. Anika Sayara,Monday,8:00:00,13:00:00
+Ms. Anika Sayara,Tuesday,8:00:00,10:30:00
+Ms. Anika Sayara,Wednesday,8:00:00,15:30:00
+Ms. Anika Sayara,Thursday,8:00:00,10:30:00
+Ms. Anika Sayara,Thursday,13:00:00,15:30:00
+Mr. Mir Imtiaz Mostafiz,Sunday,8:00:00,13:00:00
+Mr. Mir Imtiaz Mostafiz,Monday,10:30:00,15:30:00
+Mr. Mir Imtiaz Mostafiz,Tuesday,10:30:00,15:30:00
+Mr. Mir Imtiaz Mostafiz,Wednesday,8:00:00,13:00:00
+Mr. Mir Imtiaz Mostafiz,Thursday,8:00:00,10:30:00
+Mr. Mir Imtiaz Mostafiz,Thursday,13:00:00,15:30:00
+Ms. Mahzabeen Emu,Saturday,8:00:00,15:30:00
+Ms. Mahzabeen Emu,Sunday,8:00:00,15:30:00
+Ms. Mahzabeen Emu,Monday,13:00:00,15:30:00
+Ms. Mahzabeen Emu,Tuesday,8:00:00,15:30:00
+Ms. Mahzabeen Emu,Thursday,8:00:00,15:30:00
+Ms. Tasnim Kabir,Saturday,8:00:00,15:30:00
+Ms. Tasnim Kabir,Sunday,8:00:00,15:30:00
+Ms. Tasnim Kabir,Monday,10:30:00,13:00:00
+Ms. Tasnim Kabir,Tuesday,8:00:00,10:30:00
+Ms. Tasnim Kabir,Wednesday,8:00:00,10:30:00
