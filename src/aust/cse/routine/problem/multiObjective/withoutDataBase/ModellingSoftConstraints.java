@@ -189,7 +189,7 @@ public class ModellingSoftConstraints {
 	void readTeacherPrefferedTimeSlotFromFile() {
 		BufferedReader br = null;
 		String line = "";
-		String csvFile = "TeacherPreferredSlot.csv";
+		String csvFile = "TeacherPreferredSlotAlternate.csv";
 		String cvsSplitBy = ",";
 
 		try {
