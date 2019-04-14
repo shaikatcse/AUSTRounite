@@ -1,6 +1,6 @@
 The results are generated using NSGAII, the smart intilzation and soft constraints binary tourament.
 population size: 300
-max Evaluations: 12,00,000
+max Evaluations: 18,00,000
 crossover probability: 0.90
 mutation probability: 0.20
 
