@@ -604,7 +604,7 @@ public class AUSTCSERoutineMultiObjectiveProblemV2WithSC extends Problem {
 	 * findATheoryCourseWhichIsNotAppearInVector(vector_, slotHead+2, courseInfo,
 	 * slotInfo);*/
 	 
-	 		vector_[slotHead+0]=courseId; 
+	 		vector_[slotHead+0]=courseId; 	
 	 		vector_[slotHead+1]=SupportForCreatVariables.findACourseWithSameYearSemerterAndSectionAndNotInVector(vector_, courseId, courseInfo); 
 	 		vector_[slotHead+2]=SupportForCreatVariables.findACourseWithSameYearSemerterAndSectionAndNotInVector(vector_, courseId, courseInfo); 
 	  

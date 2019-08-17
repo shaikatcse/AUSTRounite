@@ -63,7 +63,7 @@ public class AUSTRoutineProblemMultiObjective_main_NSGAII_NOInit_V2 {
 
     HashMap  parameters ; // Operator parameters
         
-    for(int i=0;i<1;i++) {
+    for(int i=0;i<5;i++) {
 
     	String resultPath=".\\results\\multiObjective\\NOinit\\run"+i;
     problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");

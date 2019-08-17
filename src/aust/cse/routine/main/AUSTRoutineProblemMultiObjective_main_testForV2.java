@@ -71,7 +71,7 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2 {
     	String resultPath=".\\results\\testV2\\run"+i;
     problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
     
-    algorithm = new NSGAIISC(problem, resultPath);
+    algorithm = new NSGAII(problem, resultPath);
     //algorithm = new gGA(problem) ;
     
     // Algorithm params

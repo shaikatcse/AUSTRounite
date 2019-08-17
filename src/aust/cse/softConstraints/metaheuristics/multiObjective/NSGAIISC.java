@@ -47,7 +47,7 @@ import jmetal.util.comparators.CrowdingComparator;
 public class NSGAIISC extends Algorithm {
   
 	File file;
-	PrintWriter fileForSoftConstraint;
+	PrintWriter fileForSoftConstraint, fileForHardConstraint, fileForInit;
 	/**
    * Constructor
    * @param problem Problem to solve
@@ -61,7 +61,11 @@ public class NSGAIISC extends Algorithm {
 		file = new File(folderForGenerationData);
 		file.mkdirs();
 		try {
+			fileForInit = new PrintWriter(file.getPath()+"\\init");
 			fileForSoftConstraint = new PrintWriter(file.getPath()+"\\trackingSoftConstraints");
+			fileForHardConstraint = new PrintWriter(file.getPath()+"\\trackingHardConstraints");
+			
+			
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,7 +80,9 @@ public class NSGAIISC extends Algorithm {
    * @throws JMException 
    */
   public SolutionSet execute() throws JMException, ClassNotFoundException {
-    int populationSize;
+    boolean isGenrataionForHArdConstraintWritten = false;
+	  
+	int populationSize;
     int maxEvaluations;
     int evaluations;
 
@@ -119,17 +125,18 @@ public class NSGAIISC extends Algorithm {
   //for tracking////
     //for(int j=0;j<10;j++) {
     
-    for (int i = 0; i < populationSize / 2; i++) {
+    for (int i = 0; i < populationSize ; i++) {
 
 		newSolution = ((AUSTCSERoutineMultiObjectiveProblemV2WithSC) problem_).createVariable();
+		problem_.repair(newSolution);
 		problem_.evaluate(newSolution);
 		problem_.evaluateConstraints(newSolution);
 		problem_.evaluateSoftConstraints(newSolution);
 		evaluations++;
-		
+		population.add(newSolution);
     }
     
-	for (int i = 0; i < populationSize / 2; i++) {
+/*	for (int i = 0; i < populationSize / 2; i++) {
 		newSolution = new Solution(problem_);
 		problem_.repair(newSolution);
 		problem_.evaluate(newSolution);
@@ -138,15 +145,22 @@ public class NSGAIISC extends Algorithm {
 		evaluations++;
 		population.add(newSolution);
 	} // for
-	
+	*/
 
-
-	Ranking r = new Ranking(population);
-	if(r.getSubfront(0).size()==0)
-		population.printFeasibleFUN(file.getPath()+"\\initP");
-	else
-		r.getSubfront(0).printFeasibleFUN(file.getPath()+"\\initP");
-    // Generations 
+    double sumHard =0.0;
+  	int numOfHardIndv=0;
+  	for(int i=0;i<populationSize;i++) {
+ 
+  		if(population.get(i).getOverallConstraintViolation()<0.0) {
+  			sumHard+=population.get(i).getOverallConstraintViolation();
+  			numOfHardIndv++;
+  		}
+  	}
+    
+  	fileForInit.write((sumHard)/(double)numOfHardIndv+" "+numOfHardIndv);
+  	fileForInit.close();
+  	
+	// Generations 
     while (evaluations < maxEvaluations) {
 
       // Create the offSpring solutionSet      
@@ -224,6 +238,24 @@ public class NSGAIISC extends Algorithm {
       } // if         
       
       //tracking
+      
+      boolean isAnyFeasibleSolutionFound = false;
+      if(!isGenrataionForHArdConstraintWritten) {
+    	  for(int i=0; i<populationSize;i++) {
+    		  if(population.get(i).getOverallConstraintViolation()>=0.0) {
+    			  isAnyFeasibleSolutionFound = true;
+    			  break;
+    		  }
+         }
+    	  
+    	  if(isAnyFeasibleSolutionFound) {
+    		  fileForHardConstraint.write(evaluations/populationSize+System.getProperty( "line.separator" ));
+    		  isGenrataionForHArdConstraintWritten = true;
+    		  fileForHardConstraint.close();
+    	  }
+      
+      }
+      
       boolean isAllahardConstraintsSatisfy=true;
      for(int i=0; i<populationSize;i++) {
       if(population.get(i).getOverallConstraintViolation()<0.0) {
