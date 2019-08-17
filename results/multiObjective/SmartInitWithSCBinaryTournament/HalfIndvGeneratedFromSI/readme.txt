@@ -13,4 +13,4 @@ tracking HardConstrints: report the generation number when first feasible indivi
 trackingSoftConstraints: contains 3 columns. first column contains the generation, second column contain average soft constraint violation and the last colum contain the number of individuals that violate soft constraints
 The question is why the soft constraint violation reported from a perticular generation. The starting generation is the first generation when all hard constriants are met.
 
-all the individuals are generated using smart initialization.
+half of the total population  are generated using smart initialization. Rest of them are random initialization.
