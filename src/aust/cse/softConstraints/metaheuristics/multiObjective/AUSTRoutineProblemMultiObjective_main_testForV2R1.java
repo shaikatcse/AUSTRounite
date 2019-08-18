@@ -58,7 +58,7 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2R1 {
 
     HashMap  parameters ; // Operator parameters
         
-    for(int i=0;i<2;i++) {
+    for(int i=10;i<12;i++) {
 
     	String resultPath=".\\results\\multiObjective\\SmartInitWithSCBinaryTournament\\run"+i;
     problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
