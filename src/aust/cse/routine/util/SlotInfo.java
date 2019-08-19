@@ -100,6 +100,17 @@ public class SlotInfo {
 		return null;
 		
 	}
+	
+	public static SlotInfo searchSlotInfoArryListBySlotID(List<SlotInfo> slotInfo, String slotID){
+		for(SlotInfo o: slotInfo){
+			if( o.getSlotID().equals(slotID))
+				return o; 
+		}
+		return null;
+		
+	}
+	
+	
 
 	
 public static void main(String args[]) throws IOException{

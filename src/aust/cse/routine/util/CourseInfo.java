@@ -70,6 +70,16 @@ public class CourseInfo {
 		
 	}
 	
+	public static CourseInfo srachCourseInfoArryList(List<CourseInfo> courseInfo, String courseNo, String courseSection, String courseStudentGroup){
+		for(CourseInfo o: courseInfo){
+			if( o.getCourseNo().equals(courseNo) && o.getAssignedSection().equals(courseSection) &&
+					o.getAssignedLabSection().equals(courseStudentGroup)) 
+				return o; 
+		}
+		return null;
+		
+	}
+	
 	
 	public static void main(String args[]) throws IOException{
 		

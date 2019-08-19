@@ -62,7 +62,7 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2R2 {
 
     HashMap  parameters ; // Operator parameters
         
-    for(int i=2;i<4;i++) {
+    for(int i=12;i<14;i++) {
 
     	String resultPath=".\\results\\multiObjective\\SmartInitWithSCBinaryTournament\\run"+i;
     problem = new AUSTCSERoutineMultiObjectiveProblemV2WithSC("Permutation");
@@ -86,8 +86,8 @@ public class AUSTRoutineProblemMultiObjective_main_testForV2R2 {
   
     /* Selection Operator */
     parameters = null;
-    selection = SelectionFactory.getSelectionOperator("BinaryTournament", parameters);
-    //selection = new aust.cse.softConstraints.operators.selection.BinaryTournamentSC(parameters); 
+    //selection = SelectionFactory.getSelectionOperator("BinaryTournament", parameters);
+    selection = new aust.cse.softConstraints.operators.selection.BinaryTournamentSC(parameters); 
     
     /* Add the operators to the algorithm*/
     algorithm.addOperator("crossover",crossover);
